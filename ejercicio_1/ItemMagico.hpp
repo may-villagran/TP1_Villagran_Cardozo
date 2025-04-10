@@ -53,7 +53,7 @@ private:
 
     void revelar_pagina();                       // Desbloquea una nueva página (nivel)
     void corromper_libro();                      // Transforma el libro (a oscuro)
-    void mejorar_hechizo(string nombre_hechizo); // Aumenta potencia de un conjuro
+
 
 public:
     LibroHechizos(string nombre);
