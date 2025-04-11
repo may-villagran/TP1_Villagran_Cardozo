@@ -42,9 +42,7 @@ private:
     int velocidad_ataque;
     bool furia; // al activar furia las velocidades de ataques son mayores
     int daño_extra;
-
-    void aumentar_fuerza_bruta(); // Incrementa la fuerza bruta del bárbaro
-    void mejorar_resistencia();   // Incrementa la resistencia física del bárbaro
+    
     void activar_furia();         // Activa un estado de furia que aumenta el daño temporalmente
     void mitigar_daño();          // Reduce el daño recibido gracias a su resistencia física
     void regenerar_vida();        // Recupera puntos de vida al entrar en un estado de calma
@@ -66,8 +64,7 @@ private:
     bool proteccion;
     float valor_proteccion;
 
-    void aumentar_fuerza();           // Incrementa la fuerza del paladín
-    void mejorar_agilidad();          // Incrementa la agilidad del paladín
+         // Incrementa la agilidad del paladín
     void activar_proteccion_divina(); // Activa una protección divina que reduce el daño recibido
     void autocurarse();               // Recupera vida gracias a su habilidad de autocuración
     void reforzar_proteccion();       // Mejora la efectividad de su protección
@@ -92,8 +89,6 @@ protected:
 
     // Incrementa la precisión del caballero
     void mejorar_precision();
-    // Incrementa la velocidad de ataque del caballero
-    void aumentar_velocidad_ataque();
     // Activa una postura defensiva que reduce el daño recibido
     void activar_postura_defensiva();
     // Incrementa la resistencia del caballero
@@ -121,10 +116,6 @@ private:
 
     // Incrementa la destreza en combate del mercenario
     void mejorar_destreza();
-
-    // Incrementa la rapidez de los golpes del mercenario
-    void aumentar_rapidez_golpe();
-
     // Activa un estado de sigilo reduciendo los ataques
     void activar_sigilo();
 

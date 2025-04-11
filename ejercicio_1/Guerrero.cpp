@@ -10,7 +10,8 @@ Guerrero::Guerrero(string nombre, TipoArma arma_compatible) : nombre(nombre),
                                                               arma_compatible(arma_compatible),
                                                               hp(100),
                                                               nivel_guerrero(0),
-                                                              daño_ataque(5) {}
+                                                              daño_ataque(5),
+                                                              hay_arma_compatible(false) {}
 
 Guerrero::Guerrero(string nombre, TipoArma arma_compatible, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, arma_compatible)
 {
@@ -76,6 +77,7 @@ int Barbaro::atacar()
 
 void Barbaro::defender(int daño)
 {
+    mitigar_daño();
     int daño_reducido = daño - (resistencia_física * 2);
     this->hp -= (daño_reducido > 0) ? daño_reducido : 0;
     regenerar_vida();
@@ -99,6 +101,12 @@ void Barbaro::activar_furia()
     furia = true;
     daño_extra += 5;
     cout << nombre << " ha activado la furia, aumentando su daño!" << endl;
+}
+
+void Barbaro::mitigar_daño()
+{
+    resistencia_física += 2;
+    cout << nombre << " ha mitigado el daño, aumentando su resistencia física!" << endl;
 }
 
 void Barbaro::regenerar_vida()
@@ -134,6 +142,7 @@ int Paladin::atacar()
 
 void Paladin::defender(int daño)
 {
+    activar_proteccion_divina();
     int daño_reducido = daño - (valor_proteccion * daño) - (fuerza * 0.5);
     this->hp -= (daño_reducido > 0) ? daño_reducido : 0;
     autocurarse();
@@ -237,6 +246,12 @@ void Caballero::usar_armadura()
     cout << nombre << " ha reforzado su armadura!" << endl;
 }
 
+void Caballero::mejorar_armadura()
+{
+    armadura += 2;
+    cout << nombre << " ha mejorado su armadura, aumentando la defensa!" << endl;
+}
+
 // Mercenario
 Mercenario::Mercenario(string nombre) : Guerrero(nombre, TipoArma::ESPADA),
                                         destreza_combate(5),
@@ -255,9 +270,10 @@ Mercenario::Mercenario(string nombre, vector<unique_ptr<IArma>> armas) : Guerrer
 int Mercenario::atacar()
 {
     mejorar_destreza();
+    mejorar_golpe_critico();
     int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0);
     int daño_total = daño_base + destreza_combate + (rapidez_golpe * 2);
-    if (rand() % 100 < 20) // 20 de prob de golpe crítico
+    if (rand() % 100 < 20) // 20% de probabilidad de golpe crítico
     {
         daño_total += daño_critico;
         cout << nombre << " realizó un golpe crítico!" << endl;
@@ -268,7 +284,7 @@ int Mercenario::atacar()
 void Mercenario::defender(int daño)
 {
     esquivar_ataques();
-    if (evasion_ataques && (rand() % 100 < 10)) // 10 de prob de evadir
+    if (evasion_ataques && (rand() % 100 < 10)) // 10% de probabilidad de evadir
     {
         cout << nombre << " evadió el ataque!" << endl;
         return;
@@ -301,6 +317,12 @@ void Mercenario::mejorar_destreza()
 {
     destreza_combate += 1;
     cout << nombre << " ha mejorado su destreza en combate!" << endl;
+}
+
+void Mercenario::mejorar_golpe_critico()
+{
+    daño_critico += 5;
+    cout << nombre << " ha mejorado su habilidad de golpe crítico, aumentando el daño crítico!" << endl;
 }
 
 void Mercenario::esquivar_ataques()
