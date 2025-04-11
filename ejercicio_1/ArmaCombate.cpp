@@ -284,3 +284,78 @@ void Garrote::calibrar_peso()
     peso_golpe += 0.1;
     cout << "El peso del garrote ha sido calibrado." << endl;
 }
+
+//_________________ESPADA_________________///
+
+// Constructor de Espada
+Espada::Espada(string nombre) : ArmaCombate(nombre),
+                                filo(TipoMetal::HIERRO),
+                                empuñadura(TipoMadera::ROBLE),
+                                filo_corte(1.5),
+                                calidad_empuñadura(80),
+                                tiene_guarda(true) {}
+
+// Desgaste de la espada
+void Espada::desgaste()
+{
+    int desgaste_calculado = static_cast<int>((filo_corte * 0.4 + calidad_empuñadura * 0.3) * 0.1);
+    durabilidad -= desgaste_calculado;
+    if (durabilidad <= 0)
+    {
+        durabilidad = 0;
+        roto = true;
+    }
+    cout << "La espada " << nombre << " se ha desgastado. Durabilidad restante: " << durabilidad << endl;
+}
+
+// Mejorar la espada
+void Espada::mejorar()
+{
+    afilar_filo();
+    reforzar_empuñadura();
+    if (!tiene_guarda)
+    {
+        ajustar_guarda();
+    }
+    cout << "La espada " << nombre << " ha sido mejorada." << endl;
+}
+
+// Atacar con la espada
+int Espada::atacar()
+{
+    if (roto)
+    {
+        cout << "La espada " << nombre << " está rota y no puede ser usada." << endl;
+        return 0;
+    }
+
+    // Calcular daño basado en los atributos
+    int daño = static_cast<int>(daño_base + filo_corte * 0.5 + calidad_empuñadura * 0.2);
+    if (tiene_guarda)
+    {
+        daño += 5; // Bonus por tener guarda
+    }
+
+    desgaste();
+    cout << "La espada " << nombre << " ha atacado causando " << daño << " de daño." << endl;
+    return daño;
+}
+
+// Métodos privados de Espada
+void Espada::afilar_filo()
+{
+    filo_corte += 0.2;
+    cout << "El filo de la espada ha sido afilado. Filo actual: " << filo_corte << endl;
+}
+
+void Espada::reforzar_empuñadura()
+{
+    calidad_empuñadura += 10;
+    cout << "La empuñadura de la espada ha sido reforzada. Calidad actual: " << calidad_empuñadura << endl;
+}
+
+void Espada::ajustar_guarda()
+{
+    tiene_guarda = true;
+    cout << "Se ha añadido una guarda a la espada para mayor protección." << endl;
+}

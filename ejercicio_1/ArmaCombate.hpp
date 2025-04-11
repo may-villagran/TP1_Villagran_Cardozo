@@ -103,7 +103,24 @@ public:
     int atacar() override;
 };
 
+//___________ESPADA___________________--
+class Espada : public ArmaCombate
+{
+private:
+    TipoMetal filo;
+    TipoMadera empuñadura;
+    float filo_corte;
+    int calidad_empuñadura;
+    bool tiene_guarda;
 
-class Espada: public ArmaCombate{
+    // Métodos propios de la clase Espada
+    void afilar_filo();
+    void reforzar_empuñadura();
+    void ajustar_guarda();
 
+public:
+    Espada(string nombre);
+    void desgaste() override;
+    void mejorar() override;
+    int atacar() override;
 };
