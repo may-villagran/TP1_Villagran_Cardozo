@@ -202,7 +202,8 @@ Amuleto::Amuleto(string nombre) : ItemMagico(nombre),
 // Desgaste del amuleto
 void Amuleto::desgaste()
 {
-    int desgaste_calculado = static_cast<int>((sintonizacion * 0.4 + carga_magica * 0.3) * 10);
+    //si esta activado el amuleto, entonces al desgaste le resto 5, 
+    int desgaste_calculado = static_cast<int>((sintonizacion * 0.4 + carga_magica * 0.3) * 10 ) - (esta_activado)? 5:0;
     nivel_conservacion -= desgaste_calculado;
     if (nivel_conservacion <= 0)
     {
