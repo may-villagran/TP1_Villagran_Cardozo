@@ -14,6 +14,6 @@ class IArma;
 class PersonajeFactory{
     public:
     static unique_ptr<IPersonaje> creacion_personaje(string nombre, TipoPersonaje personaje);
-    static unique_ptr<IPersonaje> creacion_personaje_armado(string nombre, TipoPersonaje personaje, vector<TipoArma>armas);
+    static unique_ptr<IPersonaje> creacion_personaje_armado(string nombre, TipoPersonaje personaje, vector<TipoArma>armas, vector<string>nombres_armas);
     static unique_ptr<IArma> creacion_arma(string nombre, TipoArma arma);
 };
