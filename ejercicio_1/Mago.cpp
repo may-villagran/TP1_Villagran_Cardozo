@@ -5,15 +5,16 @@ using namespace std;
 
 // Mago clase abstracta
 Mago::Mago(string nombre, TipoArma item_compatible) : nombre(nombre),
-                                                    compatible(item_compatible),
-                                                    nivel_mago(0),
-                                                    hp(80),
-                                                    daño_magico(10),
-                                                    hay_item_compatible(false) {}
+                                                      compatible(item_compatible),
+                                                      nivel_mago(0),
+                                                      hp(80),
+                                                      daño_magico(10),
+                                                      hay_item_compatible(false) {}
 
 Mago::Mago(string nombre, TipoArma item_compatible, vector<unique_ptr<IArma>> armas) : Mago(nombre, item_compatible)
 {
-    for(unique_ptr<IArma>&a : armas){
+    for (unique_ptr<IArma> &a : armas)
+    {
         this->armas_poseidas.push_back(move(a));
     }
 }
@@ -33,18 +34,16 @@ void Mago::recibir_daño(int daño)
     }
 }
 
-
-void Mago::set_armas(unique_ptr<IArma>arma)
+void Mago::set_armas(unique_ptr<IArma> arma)
 {
-        if (!arma)
+    if (!arma)
         throw invalid_argument("El arma que se está pasando es un puntero nulo.");
-    else if (armas_poseidas.size()>=2)
+    else if (armas_poseidas.size() >= 2)
         cerr << "Ya cuenta con las armas suficientes." << endl;
     else
     {
         armas_poseidas.push_back(move(arma));
-        hay_item_compatible = arma->get_tipo() == compatible? true: false;
-        
+        hay_item_compatible = arma->get_tipo() == compatible ? true : false;
     }
 }
 

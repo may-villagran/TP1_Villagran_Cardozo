@@ -67,6 +67,8 @@ Barbaro::Barbaro(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(nomb
 
 int Barbaro::atacar()
 {
+    if (furia)
+        activar_furia();
     int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.05 : 0);
     int daño_total = daño_base + fuerza_bruta + velocidad_ataque + (furia ? daño_extra * 1.5 : daño_extra);
     return daño_total;
@@ -76,6 +78,7 @@ void Barbaro::defender(int daño)
 {
     int daño_reducido = daño - (resistencia_física * 2);
     this->hp -= (daño_reducido > 0) ? daño_reducido : 0;
+    regenerar_vida();
 }
 
 void Barbaro::entrenar()
@@ -98,6 +101,14 @@ void Barbaro::activar_furia()
     cout << nombre << " ha activado la furia, aumentando su daño!" << endl;
 }
 
+void Barbaro::regenerar_vida()
+{
+    hp += 10;
+    if (hp > 100)
+        hp = 100;
+    cout << nombre << " ha regenerado vida!" << endl;
+}
+
 // Paladin
 Paladin::Paladin(string nombre) : Guerrero(nombre, TipoArma::HACHA_SIMPLE),
                                   porcentaje_autocuracion(0.05),
@@ -115,6 +126,7 @@ Paladin::Paladin(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(nomb
 
 int Paladin::atacar()
 {
+    reforzar_proteccion();
     int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0);
     int daño_total = daño_base + fuerza + (porcentaje_agilidad * 10);
     return daño_total;
@@ -124,11 +136,7 @@ void Paladin::defender(int daño)
 {
     int daño_reducido = daño - (valor_proteccion * daño) - (fuerza * 0.5);
     this->hp -= (daño_reducido > 0) ? daño_reducido : 0;
-
-    // Autocuración
-    this->hp += static_cast<int>(hp * porcentaje_autocuracion);
-    if (this->hp > 100)
-        this->hp = 100;
+    autocurarse();
 }
 
 void Paladin::entrenar()
@@ -151,6 +159,20 @@ void Paladin::activar_proteccion_divina()
     cout << nombre << " ha activado la protección divina, reduciendo el daño recibido!" << endl;
 }
 
+void Paladin::autocurarse()
+{
+    hp += static_cast<int>(hp * porcentaje_autocuracion);
+    if (hp > 100)
+        hp = 100;
+    cout << nombre << " se ha autocurado!" << endl;
+}
+
+void Paladin::reforzar_proteccion()
+{
+    valor_proteccion += 0.1;
+    cout << nombre << " ha reforzado su protección!" << endl;
+}
+
 // Caballero
 Caballero::Caballero(string nombre) : Guerrero(nombre, TipoArma::LANZA),
                                       precision(0.8),
@@ -168,6 +190,7 @@ Caballero::Caballero(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(
 
 int Caballero::atacar()
 {
+    mejorar_precision();
     int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0);
     int daño_total = daño_base + (precision * 10) + velocidad_ataque;
     return daño_total;
@@ -175,6 +198,7 @@ int Caballero::atacar()
 
 void Caballero::defender(int daño)
 {
+    usar_armadura();
     int daño_reducido = daño - (resistencia * 0.5) - armadura;
     this->hp -= (daño_reducido > 0) ? daño_reducido : 0;
 }
@@ -199,6 +223,20 @@ void Caballero::activar_postura_defensiva()
     cout << nombre << " ha activado una postura defensiva, reduciendo el daño recibido!" << endl;
 }
 
+void Caballero::mejorar_precision()
+{
+    precision += 0.1;
+    if (precision > 1.0)
+        precision = 1.0;
+    cout << nombre << " ha mejorado su precisión!" << endl;
+}
+
+void Caballero::usar_armadura()
+{
+    armadura += 1;
+    cout << nombre << " ha reforzado su armadura!" << endl;
+}
+
 // Mercenario
 Mercenario::Mercenario(string nombre) : Guerrero(nombre, TipoArma::ESPADA),
                                         destreza_combate(5),
@@ -216,6 +254,7 @@ Mercenario::Mercenario(string nombre, vector<unique_ptr<IArma>> armas) : Guerrer
 
 int Mercenario::atacar()
 {
+    mejorar_destreza();
     int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0);
     int daño_total = daño_base + destreza_combate + (rapidez_golpe * 2);
     if (rand() % 100 < 20) // 20 de prob de golpe crítico
@@ -228,6 +267,7 @@ int Mercenario::atacar()
 
 void Mercenario::defender(int daño)
 {
+    esquivar_ataques();
     if (evasion_ataques && (rand() % 100 < 10)) // 10 de prob de evadir
     {
         cout << nombre << " evadió el ataque!" << endl;
@@ -257,23 +297,34 @@ void Mercenario::activar_sigilo()
     cout << nombre << " ha activado el sigilo, aumentando su evasión!" << endl;
 }
 
+void Mercenario::mejorar_destreza()
+{
+    destreza_combate += 1;
+    cout << nombre << " ha mejorado su destreza en combate!" << endl;
+}
+
+void Mercenario::esquivar_ataques()
+{
+    evasion_ataques = true;
+    cout << nombre << " ha activado su habilidad de evasión!" << endl;
+}
+
 // Gladiador
 Gladiador::Gladiador(string nombre) : Guerrero(nombre, TipoArma::GARROTE),
                                       fuerza_alta(7),
                                       resistencia(5),
                                       supervivencia(false),
-                                      adrenalina(3),
-                                      daño_area(5) {}
+                                      adrenalina(3) {}
 
 Gladiador::Gladiador(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::GARROTE, move(armas)),
                                                                        fuerza_alta(7),
                                                                        resistencia(5),
                                                                        supervivencia(false),
-                                                                       adrenalina(3),
-                                                                       daño_area(5) {}
+                                                                       adrenalina(3) {}
 
 int Gladiador::atacar()
 {
+    activar_adrenalina();
     int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0);
     int daño_total = daño_base + fuerza_alta + (adrenalina * 2);
     return daño_total;
@@ -281,6 +332,7 @@ int Gladiador::atacar()
 
 void Gladiador::defender(int daño)
 {
+    reforzar_resistencia();
     int daño_reducido = daño - (resistencia * 0.5);
     this->hp -= (daño_reducido > 0) ? daño_reducido : 0;
 
@@ -309,4 +361,16 @@ void Gladiador::activar_supervivencia()
     resistencia += 2;
     fuerza_alta += 3;
     cout << nombre << " ha activado su habilidad de supervivencia, aumentando su fuerza y resistencia!" << endl;
+}
+
+void Gladiador::reforzar_resistencia()
+{
+    resistencia += 1;
+    cout << nombre << " ha reforzado su resistencia!" << endl;
+}
+
+void Gladiador::activar_adrenalina()
+{
+    adrenalina += 2;
+    cout << nombre << " ha activado la adrenalina, aumentando su fuerza!" << endl;
 }

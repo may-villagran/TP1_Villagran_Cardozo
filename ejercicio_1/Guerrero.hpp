@@ -16,7 +16,6 @@ protected:
     TipoArma arma_compatible;
     vector<unique_ptr<IArma>> armas_poseidas;
     bool hay_arma_compatible;
-
     virtual void entrenar() = 0;
 
 protected:
@@ -37,7 +36,7 @@ public:
 
 class Barbaro : public Guerrero
 {
-protected:
+private:
     int fuerza_bruta;
     int resistencia_física;
     int velocidad_ataque;
@@ -150,23 +149,17 @@ private:
     int fuerza_alta;
     int resistencia;
     bool supervivencia;
-    int adrenalina;
-    int daño_area;
-
-    // Incrementa la fuerza del gladiador
-    void aumentar_fuerza();
+    bool adrenalina;
 
     // Incrementa la resistencia del gladiador
     void reforzar_resistencia();
 
-    // Activa un estado de adrenalina que mejora el ataque
+    
     void activar_adrenalina();
 
     // Reduce el daño recibido gracias a su habilidad de supervivencia
     void activar_supervivencia();
 
-    // Incrementa el daño en área del gladiador
-    void mejorar_daño_area();
 
 public:
     Gladiador(string nombre);
