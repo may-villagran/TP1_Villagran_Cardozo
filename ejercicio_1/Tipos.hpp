@@ -1,4 +1,31 @@
 #pragma
+//este lo voy a usar tambien en personaje así no tengo problemas con la comparacion de strings
+enum class TipoArma
+{
+    BASTON = 1, 
+    LIBRO_HECHIZOS, 
+    POCION,
+    AMULETO,
+    HACHA_SIMPLE, 
+    HACHA_DOBLE, 
+    ESPADA, 
+    LANZA,
+    GARROTE
+};
+
+enum class TipoPersonaje{
+    HECHICERO =1,
+    CONJURADOR, 
+    BRUJO, 
+    NIGROMANTE, 
+    BARBARO, 
+    PALADIN,
+    CABALLERO, 
+    MERCENARIO, 
+    GLADIADOR
+
+};
+
 enum class TipoEfecto
 {
     CURACION = 1,
@@ -28,19 +55,6 @@ enum class TipoHechizo
     OSCURIDAD,
 };
 
-//este lo voy a usar tambien en personaje así no tengo problemas con la comparacion de strings
-enum class TipoArma
-{
-    BASTON = 1, 
-    LIBRO_HECHIZOS, 
-    POCION,
-    AMULETO,
-    HACHA_SIMPLE, 
-    HACHA_DOBLE, 
-    ESPADA, 
-    LANZA,
-    GARROTE
-};
 
 enum class TipoMadera{
     HAYA = 1,

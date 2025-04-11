@@ -102,3 +102,8 @@ public:
     void mejorar() override;
     int atacar() override;
 };
+
+
+class Espada: public ArmaCombate{
+
+};
