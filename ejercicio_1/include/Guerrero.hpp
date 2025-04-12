@@ -27,10 +27,10 @@ public:
     // metodos que las clases derivadas tienen en comun y no cambian dependiendo del personaje
     int getHP() override final;
     void recibir_daño(int daño) override final;
-    void set_arma(unique_ptr<IArma> arma);
-    // metodos que dependen de la clase derivada
-    int atacar() override; // depende de la clase derivada
-    void defender(int daño) override;
+    void set_armas(unique_ptr<IArma> arma)override final;
+    // metodos que dependen de la clase derivada, las devo poner virtual
+    virtual int atacar() =0; // depende de la clase derivada
+    virtual void defender(int daño) =0;
 };
 
 class Barbaro : public Guerrero

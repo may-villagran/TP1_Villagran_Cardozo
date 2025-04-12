@@ -38,7 +38,7 @@ void Guerrero::recibir_daño(int daño)
     }
 }
 
-void Guerrero::set_arma(unique_ptr<IArma> arma)
+void Guerrero::set_armas(unique_ptr<IArma> arma)
 {
     if (!arma)
         throw invalid_argument("El arma que se está pasando es un puntero nulo.");

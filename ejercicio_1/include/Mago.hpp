@@ -24,9 +24,10 @@ protected:
 public:
     string nombre;
     // Métodos que no dependen de la clase derivada
-    virtual void recibir_daño(int daño);
-    virtual int getHP();
-    //dependen de la clase
+    void recibir_daño(int daño) override final;
+    int getHP()override final;
+    void set_armas(unique_ptr<IArma> arma)override final;
+    //dependen de la clases, las hago virtual de nuevo así las implementan las derivadas
     virtual int atacar()=0;//ataque generico
     virtual void defender(int daño)=0; //defensa general
 };
