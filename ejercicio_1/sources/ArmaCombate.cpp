@@ -7,6 +7,9 @@ ArmaCombate::ArmaCombate(string nombre) : durabilidad(100),
                                           daño_base(10),
                                           roto(false),
                                           nombre(nombre){}
+TipoArma ArmaCombate::get_tipo(){
+    return tipo_arma_combate;
+}
 
 // Obtener durabilidad del arma
 int ArmaCombate::get_duarbilidad()

@@ -89,29 +89,30 @@ void Hechicero::potenciar_conjuro()
     cout << nombre << " ha potenciado su conjuro!" << endl;
 }
 
-void Hechicero::lanzar_hechizo()
-{
-    if (energia_magica >= 10)
-    {
-        energia_magica -= 10;
-        cout << nombre << " ha lanzado un hechizo poderoso!" << endl;
-    }
-    else
-    {
-        cout << nombre << " no tiene suficiente energía mágica para lanzar un hechizo." << endl;
-    }
-}
 
-void Hechicero::usar_baston_magico()
-{
-    uso_baston = true;
-    cout << nombre << " está usando su bastón mágico para amplificar su poder!" << endl;
-}
 
 void Hechicero::regenerar_energia()
 {
     energia_magica += 15;
     cout << nombre << " ha regenerado energía mágica!" << endl;
+}
+
+// Implementación de aprender_habilidades para Hechicero
+void Hechicero::aprender_habilidades()
+{
+    if (nivel_mago >= nivel_max)
+    {
+        cout << "El personaje: " << nombre << " ha llegado a su máximo nivel" << endl;
+        return;
+    }
+
+    nivel_mago++;
+    cout << nombre << " ha aprendido nuevas habilidades mágicas. Nivel actual: " << nivel_mago << endl;
+
+    // Usar métodos propios del Hechicero
+    aumentar_inteligencia();
+    potenciar_conjuro();
+    regenerar_energia();
 }
 
 // Conjurador
@@ -162,29 +163,30 @@ void Conjurador::potenciar_invocacion()
     cout << nombre << " ha potenciado su capacidad de invocación!" << endl;
 }
 
-void Conjurador::lanzar_hechizo_rapido()
-{
-    if (velocidad_invocacion > 0)
-    {
-        velocidad_invocacion--;
-        cout << nombre << " ha lanzado un hechizo rápido!" << endl;
-    }
-    else
-    {
-        cout << nombre << " no puede lanzar hechizos rápidos en este momento." << endl;
-    }
-}
 
-void Conjurador::aumentar_resistencia()
-{
-    resistencia_magica += 5;
-    cout << nombre << " ha aumentado su resistencia mágica!" << endl;
-}
 
 void Conjurador::regenerar_energia_invocacion()
 {
     energia_invocacion += 10;
     cout << nombre << " ha regenerado energía para invocaciones!" << endl;
+}
+
+// Implementación de aprender_habilidades para Conjurador
+void Conjurador::aprender_habilidades()
+{
+    if (nivel_mago >= nivel_max)
+    {
+        cout << "El personaje: " << nombre << " ha llegado a su máximo nivel" << endl;
+        return;
+    }
+
+    nivel_mago++;
+    cout << nombre << " ha aprendido nuevas habilidades de invocación. Nivel actual: " << nivel_mago << endl;
+
+    // Usar métodos propios del Conjurador
+    invocar_criatura();
+    potenciar_invocacion();
+    regenerar_energia_invocacion();
 }
 
 // Brujo
@@ -215,18 +217,7 @@ void Brujo::defender(int daño)
     this->hp -= (daño_reducido > 0) ? daño_reducido : 0;
 }
 
-void Brujo::lanzar_maldicion()
-{
-    if (energia_oscura >= 15)
-    {
-        energia_oscura -= 15;
-        cout << nombre << " ha lanzado una maldición oscura!" << endl;
-    }
-    else
-    {
-        cout << nombre << " no tiene suficiente energía oscura para lanzar una maldición." << endl;
-    }
-}
+
 
 void Brujo::absorber_energia()
 {
@@ -246,16 +237,24 @@ void Brujo::aumentar_defensa_magica()
     cout << nombre << " ha aumentado su defensa mágica!" << endl;
 }
 
-void Brujo::debilitar_enemigo()
+
+
+// Implementación de aprender_habilidades para Brujo
+void Brujo::aprender_habilidades()
 {
-    if (capacidad_debilitar_enemigos)
+    if (nivel_mago >= nivel_max)
     {
-        cout << nombre << " ha debilitado a su enemigo!" << endl;
+        cout << "El personaje: " << nombre << " ha llegado a su máximo nivel" << endl;
+        return;
     }
-    else
-    {
-        cout << nombre << " no puede debilitar enemigos en este momento." << endl;
-    }
+
+    nivel_mago++;
+    cout << nombre << " ha aprendido nuevas habilidades oscuras. Nivel actual: " << nivel_mago << endl;
+
+    // Usar métodos propios del Brujo
+    potenciar_poder_oscuro();
+    absorber_energia();
+    aumentar_defensa_magica();
 }
 
 // Nigromante
@@ -306,27 +305,22 @@ void Nigromante::potenciar_dominio()
     cout << nombre << " ha potenciado su dominio sobre los muertos!" << endl;
 }
 
-void Nigromante::lanzar_ataque_sombrio()
-{
-    if (energia_necromantica >= 15)
-    {
-        energia_necromantica -= 15;
-        cout << nombre << " ha lanzado un ataque sombrío devastador!" << endl;
-    }
-    else
-    {
-        cout << nombre << " no tiene suficiente energía para lanzar un ataque sombrío." << endl;
-    }
-}
 
-void Nigromante::aumentar_resistencia_sombras()
-{
-    resistencia_sombras += 5;
-    cout << nombre << " ha aumentado su resistencia a las sombras!" << endl;
-}
 
-void Nigromante::regenerar_energia_necromantica()
+// Implementación de aprender_habilidades para Nigromante
+void Nigromante::aprender_habilidades()
 {
-    energia_necromantica += 10;
-    cout << nombre << " ha regenerado energía necromántica!" << endl;
+    if (nivel_mago >= nivel_max)
+    {
+        cout << "El personaje: " << nombre << " ha llegado a su máximo nivel" << endl;
+        return;
+    }
+
+    nivel_mago++;
+    cout << nombre << " ha aprendido nuevas habilidades necrománticas. Nivel actual: " << nivel_mago << endl;
+
+    // Usar métodos propios del Nigromante
+    invocar_muertos();
+    potenciar_dominio();
+    regenerar_energia_necromantica();
 }

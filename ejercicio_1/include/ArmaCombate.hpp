@@ -10,11 +10,15 @@ protected:
     int daño_base;
     bool roto;
 
+    ArmaCombate(string nombre);//se puede heredar pero no usar
+
 public:
     string nombre;
 
-    ArmaCombate(string nombre);
+    // son siempre las msimas
+    TipoArma get_tipo() override;
     int get_duarbilidad() override;
+    // dependen de las derivadas
     virtual void desgaste() override = 0;
     virtual int atacar() override = 0;
 };
