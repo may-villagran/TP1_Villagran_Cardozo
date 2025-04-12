@@ -1,5 +1,5 @@
-#include "Guerrero.hpp"
-#include "IArma.hpp"
+#include "../include/Guerrero.hpp"
+#include "../include/IArma.hpp"
 #include <iostream>
 using namespace std;
 

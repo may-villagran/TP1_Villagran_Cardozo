@@ -1,4 +1,4 @@
-#include "ItemMagico.hpp"
+#include "../include/ItemMagico.hpp"
 #include <iostream>
 using namespace std;
 

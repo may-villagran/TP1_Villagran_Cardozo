@@ -1,10 +1,12 @@
 #pragma once
 #include <memory>
 //inclusion de las clases
-#include "../ejercicio_1/Guerrero.hpp"
-#include "../ejercicio_1/Mago.hpp"
-#include "../ejercicio_1/ArmaCombate.hpp"
-#include "../ejercicio_1/ItemMagico.hpp"
+#include "../ejercicio_1/include/Guerrero.hpp"
+#include "../ejercicio_1/include/Mago.hpp"
+#include "../ejercicio_1/include/ArmaCombate.hpp"
+#include "../ejercicio_1/include/ItemMagico.hpp"
+#include "../ejercicio_1/include/Tipos.hpp"
+
 
 using namespace std;
 //declaraciones adelantadas

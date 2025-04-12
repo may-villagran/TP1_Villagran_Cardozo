@@ -1,4 +1,4 @@
-#include "ArmaCombate.hpp"
+#include "../include/ArmaCombate.hpp" // Adjusted the relative path to locate the header file
 #include <iostream>
 using namespace std;
 
