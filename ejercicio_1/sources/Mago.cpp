@@ -4,12 +4,14 @@
 using namespace std;
 
 // Mago clase abstracta
-Mago::Mago(string nombre, TipoArma item_compatible) : nombre(nombre),
-                                                      compatible(item_compatible),
-                                                      nivel_mago(0),
+Mago::Mago(string nombre, TipoArma item_compatible) : nivel_mago(0),
                                                       hp(80),
                                                       daño_magico(10),
-                                                      hay_item_compatible(false) {}
+                                                      hay_item_compatible(false),
+                                                      compatible(item_compatible),
+                                                      nombre(nombre)
+{
+}
 
 Mago::Mago(string nombre, TipoArma item_compatible, vector<unique_ptr<IArma>> armas) : Mago(nombre, item_compatible)
 {

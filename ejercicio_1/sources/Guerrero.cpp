@@ -6,12 +6,12 @@ using namespace std;
 class Arma;
 
 // Guerrero clase abstracta
-Guerrero::Guerrero(string nombre, TipoArma arma_compatible) : nombre(nombre),
-                                                              arma_compatible(arma_compatible),
+Guerrero::Guerrero(string nombre, TipoArma arma_compatible) : nivel_guerrero(0),
                                                               hp(100),
-                                                              nivel_guerrero(0),
                                                               daño_ataque(5),
-                                                              hay_arma_compatible(false) {}
+                                                              arma_compatible(arma_compatible),
+                                                              hay_arma_compatible(false),
+                                                              nombre(nombre) {}
 
 Guerrero::Guerrero(string nombre, TipoArma arma_compatible, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, arma_compatible)
 {

@@ -8,19 +8,21 @@ class ItemMagico : public IArma
 {
 public:
     string nombre;
-    string tipo_objeto;
+    TipoArma tipo_objeto;
     bool roto;         // me indica si el arma esta rota o no
 
     int get_duarbilidad() override; // me devuelve cuanto le queda al arma
+    TipoArma get_tipo()override;
     // dependen de la clase derivada
     void desgaste() override; // cuando se ataca se va a llamar a este metodo
     int atacar() override;    // devuleve el daño del ataque
-
+    void mejorar() override;
 protected:
+
     int durabilidad;
     int daño_base;
     float desgaste_uso;
-    ItemMagico(string nombre);//así lo heredan las derivadas, pero no se puede instanciar
+    ItemMagico(string nombre, TipoArma tipo);//así lo heredan las derivadas, pero no se puede instanciar
 };
 //_________________BASTON_________________________________________
 class Baston : public ItemMagico

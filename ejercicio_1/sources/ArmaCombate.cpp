@@ -3,10 +3,10 @@
 using namespace std;
 
 // Constructor base de ArmaCombate
-ArmaCombate::ArmaCombate(string nombre) : nombre(nombre),
-                                          durabilidad(100),
+ArmaCombate::ArmaCombate(string nombre) : durabilidad(100),
                                           daño_base(10),
-                                          roto(false) {}
+                                          roto(false),
+                                          nombre(nombre){}
 
 // Obtener durabilidad del arma
 int ArmaCombate::get_duarbilidad()

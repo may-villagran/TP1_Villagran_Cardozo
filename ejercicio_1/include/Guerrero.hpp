@@ -1,11 +1,10 @@
 #pragma once
 #include "IPersonaje.hpp"
+#include "IArma.hpp"
+#include "Tipos.hpp"
 #include <vector>
 #include <memory>
 using namespace std;
-
-class IArma;
-
 class Guerrero : public IPersonaje
 {
 protected:

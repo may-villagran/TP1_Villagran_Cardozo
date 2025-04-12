@@ -3,11 +3,12 @@
 using namespace std;
 
 // Constructor base,usado en las clases derivadas
-ItemMagico::ItemMagico(string nombre) : nombre(nombre),
+ItemMagico::ItemMagico(string nombre, TipoArma tipo) : nombre(nombre),
+                                        tipo_objeto(tipo),
+                                        roto(false),
                                         durabilidad(100),
                                         daño_base(10),
-                                        desgaste_uso(0.1),
-                                        roto(false) {}
+                                        desgaste_uso(0.1) {}
 
 // Obtener durabilidad del objeto mágico
 int ItemMagico::get_duarbilidad()
@@ -15,9 +16,13 @@ int ItemMagico::get_duarbilidad()
     return durabilidad;
 }
 
+TipoArma ItemMagico::get_tipo(){
+    return tipo_objeto;
+}
+
 //_________________BASTON_________________
 
-Baston::Baston(string nombre) : ItemMagico(nombre),
+Baston::Baston(string nombre) : ItemMagico(nombre, TipoArma::BASTON),
                                 golpe_baston(5.0),
                                 amplificador_elemental(1.2),
                                 porcentaje_canalizacion(0.8),
@@ -63,20 +68,23 @@ void Baston::amplificar_magia()
     cout << "El bastón ha amplificado su magia." << endl;
 }
 
-void Baston::tallar_nueva_madera(){
-    if(static_cast<int>(madera)>=5){
-        cout<<"La madera no puede ser mejorada, pero se incrementa la canalizacion"<<endl;
-        porcentaje_canalizacion+=0.01;
+void Baston::tallar_nueva_madera()
+{
+    if (static_cast<int>(madera) >= 5)
+    {
+        cout << "La madera no puede ser mejorada, pero se incrementa la canalizacion" << endl;
+        porcentaje_canalizacion += 0.01;
     }
-    else{
-        madera = static_cast<TipoMadera>(static_cast<int>(madera)+1);
-        cout<<"La madera ha sido mejorada"<<endl;
+    else
+    {
+        madera = static_cast<TipoMadera>(static_cast<int>(madera) + 1);
+        cout << "La madera ha sido mejorada" << endl;
     }
 }
 
 //_________________LIBRO DE HECHIZOS_________________
 
-LibroHechizos::LibroHechizos(string nombre) : ItemMagico(nombre),
+LibroHechizos::LibroHechizos(string nombre) : ItemMagico(nombre, TipoArma::LIBRO_HECHIZOS),
                                               numero_hechizos(5),
                                               paginas_ocultas(2),
                                               es_maligno(false),
@@ -112,14 +120,14 @@ int LibroHechizos::atacar()
         return 0;
     }
     desgaste();
-    int daño_maligno = es_maligno? 5:0; //sin el libro es maligno tengo 5 de dañó
-    return static_cast<int>(daño_base + numero_hechizos * 0.2 + daño_maligno*0.24);
+    int daño_maligno = es_maligno ? 5 : 0; // sin el libro es maligno tengo 5 de dañó
+    return static_cast<int>(daño_base + numero_hechizos * 0.2 + daño_maligno * 0.24);
 }
 
 void LibroHechizos::revelar_pagina()
 {
     paginas_ocultas--;
-    numero_hechizos+=5;
+    numero_hechizos += 5;
     cout << "Se ha revelado una nueva página del libro de hechizos. /n Ha aumentado la cantidad de hechizos" << endl;
 }
 
@@ -131,7 +139,7 @@ void LibroHechizos::corromper_libro()
 
 //_________________POCION_________________
 
-Pocion::Pocion(string nombre) : ItemMagico(nombre),
+Pocion::Pocion(string nombre) : ItemMagico(nombre, TipoArma::POCION),
                                 calidad(8),
                                 pureza_magica(0.9),
                                 nivel_fabricacion(3),
@@ -193,7 +201,7 @@ void Pocion::mejorar_pureza()
 
 //_________________AMULETO_________________
 
-Amuleto::Amuleto(string nombre) : ItemMagico(nombre),
+Amuleto::Amuleto(string nombre) : ItemMagico(nombre, TipoArma::AMULETO),
                                   sintonizacion(0.5),
                                   carga_magica(50),
                                   esta_activado(false),
@@ -202,8 +210,8 @@ Amuleto::Amuleto(string nombre) : ItemMagico(nombre),
 // Desgaste del amuleto
 void Amuleto::desgaste()
 {
-    //si esta activado el amuleto, entonces al desgaste le resto 5, 
-    int desgaste_calculado = static_cast<int>((sintonizacion * 0.4 + carga_magica * 0.3) * 10 ) - (esta_activado)? 5:0;
+    // si esta activado el amuleto, entonces al desgaste le resto 5,
+    int desgaste_calculado = static_cast<int>((sintonizacion * 0.4 + carga_magica * 0.3) * 10) - (esta_activado) ? 5 : 0;
     nivel_conservacion -= desgaste_calculado;
     if (nivel_conservacion <= 0)
     {

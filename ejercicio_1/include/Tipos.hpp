@@ -1,4 +1,4 @@
-#pragma
+#pragma once
 //este lo voy a usar tambien en personaje así no tengo problemas con la comparacion de strings
 enum class TipoArma
 {
