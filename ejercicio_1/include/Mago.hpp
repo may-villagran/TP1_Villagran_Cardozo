@@ -36,7 +36,7 @@ public:
 //_______________________________HECHICERO______________________________
 class Hechicero : public Mago
 {
-protected:
+private:
     int nivel_inteligencia;
     bool poder_magico_alto;
     int velocidad_conjuro;
@@ -61,7 +61,7 @@ public:
 //_____________________________CONJURADOR________________________________
 class Conjurador : public Mago
 {
-protected:
+private:
     int cantidad_hechizos;
     bool invocacion_activa;
     int energia_invocacion;
@@ -86,7 +86,7 @@ public:
 //______________________BRUJO______________________________________________
 class Brujo : public Mago
 {
-protected:
+private:
     bool poder_oscuro;
     int defensa_magica;
     int debilitacion_enemigos;
@@ -111,7 +111,7 @@ public:
 //_______________NIGROMANTE__________________________________________
 class Nigromante : public Mago
 {
-protected:
+private:
     bool dominio_muertos;
     int cantidad_muertos;
     bool control_absoluto;
@@ -121,7 +121,6 @@ protected:
     // Métodos privados
     void invocar_muertos();
     void potenciar_dominio();
-    void regenerar_energia_necromantica();
 
 public:
     Nigromante(string nombre);

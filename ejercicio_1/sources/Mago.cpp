@@ -322,5 +322,5 @@ void Nigromante::aprender_habilidades()
     // Usar métodos propios del Nigromante
     invocar_muertos();
     potenciar_dominio();
-    regenerar_energia_necromantica();
+
 }

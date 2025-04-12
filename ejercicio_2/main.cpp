@@ -9,7 +9,7 @@ using namespace std;
 
 void menu_creacion_armas()
 {
-    cout << "Seleccione el tipo de arma:" << endl;
+    cout << "\nSeleccione el tipo de arma:" << endl;
     cout << "1. Bastón" << endl;
     cout << "2. Libro de Hechizos" << endl;
     cout << "3. Poción" << endl;
@@ -24,7 +24,7 @@ void menu_creacion_armas()
 
 void menu_creacion_mago()
 {
-    cout << "Seleccione el tipo de mago:" << endl;
+    cout << "\nSeleccione el tipo de mago:" << endl;
     cout << "1. Hechicero" << endl;
     cout << "2. Conjurador" << endl;
     cout << "3. Brujo" << endl;
@@ -34,7 +34,7 @@ void menu_creacion_mago()
 
 void menu_creacion_guerrero()
 {
-    cout << "Seleccione el tipo de mago:" << endl;
+    cout << "\nSeleccione el tipo de mago:" << endl;
     cout << "1. Barbaro" << endl;
     cout << "2. Paladin" << endl;
     cout << "3. Caballero" << endl;
@@ -55,7 +55,8 @@ vector<unique_ptr<IArma>> seleccionar_armas(int cantidad_armas)
         cin >> opcion;
         cout << "Escriba el nombre del arma: ";
         string nombre;
-        cin >> nombre;
+        cin.ignore(); // Ignorar el salto de linea
+        getline(cin, nombre); // Leer toda la línea, incluyendo espacios, sino se rompe
 
         switch (opcion)
         {
@@ -107,10 +108,12 @@ unique_ptr<IPersonaje> crear_personaje_mago()
     menu_creacion_mago();
     cin >> opcion;
     cout << "Ingrese el nombre del personaje: ";
-    cin >> nombre;
+    cin.ignore(); // Ignorar el salto de linea
+    getline(cin, nombre); // Leer toda la línea, incluyendo espacios, sino se rompe
 
     if (cantidad_armas == 0)
     {
+        cout<<"El personaje no tendrá armas"<<endl;
         switch (static_cast<TipoPersonaje>(opcion))
         {
         case TipoPersonaje::HECHICERO:
@@ -155,10 +158,12 @@ unique_ptr<IPersonaje> crear_personaje_guerrero()
     menu_creacion_guerrero();
     cin >> opcion;
     cout << "Ingrese el nombre del personaje: ";
-    cin >> nombre;
+    cin.ignore();
+    getline(cin, nombre);
 
     if (cantidad_armas == 0)
     {
+        cout<<"El personaje no tendrá armas"<<endl;
         switch (static_cast<TipoPersonaje>(opcion + 4))
         {
         case TipoPersonaje::BARBARO:
@@ -213,22 +218,30 @@ int main()
     // Creacion personajes tipo Mago
     for (int i = 0; i < cantidad_magos; ++i)
     {
-        cout << "Creando personaje tipo Mago " << i + 1 << "..." << endl;
+        cout << "\nCreando personaje tipo Mago " << i + 1 << "..." << endl;
         unique_ptr<IPersonaje> personaje = crear_personaje_mago();
         if (personaje)
         {
             personajes.push_back(move(personaje));
+        }
+        else{
+            i--;
+            cout<<"Ingrese una opción válida"<<endl;
         }
     }
 
     // Creacion personajes tipo Guerrero
     for (int i = 0; i < cantidad_guerreros; ++i)
     {
-        cout << "Creando personaje tipo Guerrero " << i + 1 << "..." << endl;
+        cout << "\nCreando personaje tipo Guerrero " << i + 1 << "..." << endl;
         unique_ptr<IPersonaje> personaje = crear_personaje_guerrero();
         if (personaje)
         {
             personajes.push_back(move(personaje));
+        }
+        else{
+            i--;
+            cout<<"Ingrese una opción válida"<<endl;
         }
     }
 

@@ -11,6 +11,6 @@ class IPersonaje{
     virtual void defender(int daño)=0; //defensa general
     virtual void recibir_daño(int daño)=0;
     virtual int getHP()=0;//obetener vida
-    virtual void set_armas(unique_ptr<IArma> arma);
+    virtual void set_armas(unique_ptr<IArma> arma) = 0;
     virtual ~IPersonaje() = default;
 };
