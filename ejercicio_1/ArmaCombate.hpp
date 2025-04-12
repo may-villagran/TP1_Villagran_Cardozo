@@ -28,7 +28,7 @@ private:
     float punta_penetracion;
     bool hoja_reforzada;
     float flexibilidad_asta;
-    //metodos propios de la deriv
+    // metodos propios de la deriv
     void templar_hoja();
     void reforzar_asta();
     void reforzar_punta();
@@ -48,10 +48,10 @@ private:
     TipoMadera mango;
     float filo_corte;
     int calidad_ensamble;
-    //merodos propios
+    // merodos propios
     void afilar_hoja();
     void reforzar_union();
-    void barnizar_mago(); 
+    void barnizar_mago();
 
 public:
     HachaSimple(string nombre);
@@ -71,7 +71,7 @@ private:
     int resistencia_hojas;
 
     void afilar_lados();
-    void reforzar_filos(); //porcentaje del metal, mayor es el metal menor se refuerza el filo
+    void reforzar_filos(); // porcentaje del metal, mayor es el metal menor se refuerza el filo
     void mejorar_mango();
 
 public:
@@ -113,12 +113,12 @@ private:
     int calidad_empuñadura;
     bool tiene_guarda;
 
-    // Métodos propios de la clase Espada
+    // Métodos propios de la clase Espada, los pongo privado, ya que los uso internamente
     void afilar_filo();
     void reforzar_empuñadura();
-    void ajustar_guarda();
 
 public:
+    void ajustar_guarda();
     Espada(string nombre);
     void desgaste() override;
     void mejorar() override;
