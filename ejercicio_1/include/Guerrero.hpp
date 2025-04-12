@@ -15,10 +15,12 @@ protected:
     TipoArma arma_compatible;
     vector<unique_ptr<IArma>> armas_poseidas;
     bool hay_arma_compatible;
-    virtual void entrenar() = 0;
-//pongo los contructores protected así no los, puedo llamar pero son privados para las derivdas
+    
+    // pongo los contructores protected así no los, puedo llamar pero son privados para las derivdas
     Guerrero(string nombre, TipoArma arma_compatible);
-    Guerrero(string nombre, TipoArma arma_compatible, vector<unique_ptr<IArma>>armas); // constructor con arma
+    Guerrero(string nombre, TipoArma arma_compatible, vector<unique_ptr<IArma>> armas); // constructor con arma
+    virtual void entrenar() = 0;
+
 public:
     string nombre;
 
@@ -39,14 +41,14 @@ private:
     int velocidad_ataque;
     bool furia; // al activar furia las velocidades de ataques son mayores
     int daño_extra;
-    
-    void activar_furia();         // Activa un estado de furia que aumenta el daño temporalmente
-    void mitigar_daño();          // Reduce el daño recibido gracias a su resistencia física
-    void regenerar_vida();        // Recupera puntos de vida al entrar en un estado de calma
+
+    void activar_furia();  // Activa un estado de furia que aumenta el daño temporalmente
+    void mitigar_daño();   // Reduce el daño recibido gracias a su resistencia física
+    void regenerar_vida(); // Recupera puntos de vida al entrar en un estado de calma
 
 public:
     Barbaro(string nombre);
-    Barbaro(string nombre, vector<unique_ptr<IArma>>armas);
+    Barbaro(string nombre, vector<unique_ptr<IArma>> armas);
     int atacar() override;
     void defender(int daño) override;
     void entrenar() override;
@@ -61,14 +63,14 @@ private:
     bool proteccion;
     float valor_proteccion;
 
-         // Incrementa la agilidad del paladín
+    // Incrementa la agilidad del paladín
     void activar_proteccion_divina(); // Activa una protección divina que reduce el daño recibido
     void autocurarse();               // Recupera vida gracias a su habilidad de autocuración
     void reforzar_proteccion();       // Mejora la efectividad de su protección
 
 public:
     Paladin(string nombre);
-    Paladin(string nombre, vector<unique_ptr<IArma>>armas);
+    Paladin(string nombre, vector<unique_ptr<IArma>> armas);
 
     int atacar() override;
     void defender(int daño) override;
@@ -95,7 +97,7 @@ protected:
 
 public:
     Caballero(string nombre);
-    Caballero(string nombre, vector<unique_ptr<IArma>>armas);
+    Caballero(string nombre, vector<unique_ptr<IArma>> armas);
 
     int atacar() override;
     void defender(int daño) override;
@@ -124,7 +126,7 @@ private:
 
 public:
     Mercenario(string nombre);
-    Mercenario(string nombre, vector<unique_ptr<IArma>>armas);
+    Mercenario(string nombre, vector<unique_ptr<IArma>> armas);
 
     int atacar() override;
     void defender(int daño) override;
@@ -142,16 +144,14 @@ private:
     // Incrementa la resistencia del gladiador
     void reforzar_resistencia();
 
-    
     void activar_adrenalina();
 
     // Reduce el daño recibido gracias a su habilidad de supervivencia
     void activar_supervivencia();
 
-
 public:
     Gladiador(string nombre);
-    Gladiador(string nombre, vector<unique_ptr<IArma>>armas);
+    Gladiador(string nombre, vector<unique_ptr<IArma>> armas);
 
     int atacar() override;
     void defender(int daño) override;

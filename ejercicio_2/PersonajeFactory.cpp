@@ -26,7 +26,7 @@ unique_ptr<IPersonaje> PersonajeFactory::creacion_personaje(string nombre, TipoP
     case TipoPersonaje::MERCENARIO:
         return make_unique<Mercenario>(nombre);
     case TipoPersonaje::GLADIADOR:
-        return make_unique<Guerrero>(nombre);
+        return make_unique<Gladiador>(nombre);
 
     default:
         throw invalid_argument("Tipo de personaje desconocido");
@@ -91,7 +91,7 @@ unique_ptr<IPersonaje> PersonajeFactory::creacion_personaje_armado(string nombre
     case TipoPersonaje::MERCENARIO:
         return make_unique<Mercenario>(nombre, move(armas_personaje));
     case TipoPersonaje::GLADIADOR:
-        return make_unique<Guerrero>(nombre, move(armas_personaje));
+        return make_unique<Gladiador>(nombre, move(armas_personaje));
     default:
         throw invalid_argument("Tipo de personaje desconocido");
     }

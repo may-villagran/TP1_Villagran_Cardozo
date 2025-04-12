@@ -10,13 +10,13 @@ public:
     string nombre;
     TipoArma tipo_objeto;
     bool roto;         // me indica si el arma esta rota o no
-
-    int get_duarbilidad() override; // me devuelve cuanto le queda al arma
-    TipoArma get_tipo()override;
-    // dependen de la clase derivada
-    void desgaste() override; // cuando se ataca se va a llamar a este metodo
-    int atacar() override;    // devuleve el daño del ataque
-    void mejorar() override;
+    
+    virtual int get_duarbilidad();
+    virtual TipoArma get_tipo();
+   //dependen de las derivadas 
+    virtual int atacar() = 0;        
+    virtual void desgaste() = 0;      
+    virtual void mejorar() = 0;      
 protected:
 
     int durabilidad;

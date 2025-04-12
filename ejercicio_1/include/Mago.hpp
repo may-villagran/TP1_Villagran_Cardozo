@@ -14,22 +14,21 @@ protected:
     int nivel_mago;
     int hp;
     int daño_magico;
+    TipoArma compatible;
     vector<unique_ptr<IArma>> armas_poseidas;
     bool hay_item_compatible;
-    TipoArma compatible;
 
+    Mago(string nombre, TipoArma item_compatible, vector<unique_ptr<IArma>> arma); // constructor con arma
+    Mago(string nombre, TipoArma item_compatible);
+    virtual void aprender_habilidades() = 0; // Método virtual puro
 public:
     string nombre;
-    Mago(string nombre, TipoArma item_compatible);
-    Mago(string nombre, TipoArma item_compatible, vector<unique_ptr<IArma>> arma); // constructor con arma
     // Métodos que no dependen de la clase derivada
-    int getHP() override final; // obtener vida
-    void recibir_daño(int daño) override final;
-    void set_armas(unique_ptr<IArma> arma);
-    // Funciones que cambian dependiendo del tipo de personaje
-    int atacar() override;
-    void defender(int daño) override;
-    virtual void aprender_habilidades() = 0; // Método virtual puro
+    virtual void recibir_daño(int daño);
+    virtual int getHP();
+    //dependen de la clase
+    virtual int atacar()=0;//ataque generico
+    virtual void defender(int daño)=0; //defensa general
 };
 
 //_______________________________HECHICERO______________________________

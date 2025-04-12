@@ -14,13 +14,13 @@ protected:
 
 public:
     string nombre;
-
-    // son siempre las msimas
-    TipoArma get_tipo() override;
-    int get_duarbilidad() override;
-    // dependen de las derivadas
-    virtual void desgaste() override = 0;
-    virtual int atacar() override = 0;
+    //son las mismas para todas
+    virtual int get_duarbilidad();
+    virtual TipoArma get_tipo();
+   //dependen de las derivadas 
+    virtual int atacar() = 0;        
+    virtual void desgaste() = 0;      
+    virtual void mejorar() = 0;      
 };
 
 //_________________LANZA_________________
