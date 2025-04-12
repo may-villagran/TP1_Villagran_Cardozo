@@ -1,23 +1,18 @@
 #include "PersonajeFactory.hpp"
 #include <memory>
 #include <iostream>
-#include <typeinfo> // Para std::bad_cast
+#include <typeinfo> //para bad_cast, cuando dynamic falla 
+#include <cstdlib> //uso de rand
+#include <ctime>   //obtener tiempo 
 
 int main() {
-    // Crear un arma de tipo Espada
-    unique_ptr<IArma> arma = PersonajeFactory::creacion_arma("Espada de oro", TipoArma::ESPADA);
+    srand(time(nullptr));//iicializa la semilla,para que en cada ejecucion sean distintos los numeros
+    //uso time() así usa el tiempo de ejecucion como semilla
+    int cantidad_magos = 3 + rand()%5; //con mod 5 tengo nums de 0 a 4
+    int cantidad_guerreros = 3+rand()%5;
+    cout<<"Se van a crear:"<<"\n"<<cantidad_magos<<" Personajes de tipo Mago"<<"\n"<<cantidad_guerreros<<" Personajes de tipo Guerrero"<<endl;
+    
 
-    try {
-        // Intentar convertir el puntero base (IArma) a una referencia derivada (Espada)
-        Espada& espada_ref = dynamic_cast<Espada&>(*arma);
-        // Usar las funcionalidades específicas de Espada
-        cout << "Se ha creado una espada: " << espada_ref.nombre << endl;
-        espada_ref.mejorar();
-        espada_ref.atacar();
-        espada_ref.ajustar_guarda();
-    } catch (const bad_cast& e) {
-        cout << "El arma no es una espada: " << e.what() << std::endl;
-    }
 
     return 0;
 }
