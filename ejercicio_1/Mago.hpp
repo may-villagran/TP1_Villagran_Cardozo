@@ -17,6 +17,7 @@ protected:
     vector<unique_ptr<IArma>> armas_poseidas;
     bool hay_item_compatible;
     TipoArma compatible;
+    
     virtual void aprender_habilidades() = 0;
 
 public:
