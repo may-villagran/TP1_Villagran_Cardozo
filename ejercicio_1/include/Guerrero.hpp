@@ -19,6 +19,7 @@ protected:
     // pongo los contructores protected así no los, puedo llamar pero son privados para las derivdas
     Guerrero(string nombre, TipoArma arma_compatible);
     Guerrero(string nombre, TipoArma arma_compatible, vector<unique_ptr<IArma>> armas); // constructor con arma
+    virtual ~Guerrero() = default;
     virtual void entrenar() = 0;
 
 public:

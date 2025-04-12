@@ -9,20 +9,21 @@ class ItemMagico : public IArma
 public:
     string nombre;
     TipoArma tipo_objeto;
-    bool roto;         // me indica si el arma esta rota o no
-    
-    virtual int get_duarbilidad();
-    virtual TipoArma get_tipo();
-   //dependen de las derivadas 
-    virtual int atacar() = 0;        
-    virtual void desgaste() = 0;      
-    virtual void mejorar() = 0;      
-protected:
+    bool roto; // me indica si el arma esta rota o no
+    // no dependen de las derivadas, por lo que las pongo como final
+    int get_duarbilidad() override final;
+    TipoArma get_tipo() override final;
+    // dependen de las derivadas
+    virtual int atacar() = 0;
+    virtual void desgaste() = 0;
+    virtual void mejorar() = 0;
 
+protected:
     int durabilidad;
     int daño_base;
     float desgaste_uso;
-    ItemMagico(string nombre, TipoArma tipo);//así lo heredan las derivadas, pero no se puede instanciar
+    ItemMagico(string nombre, TipoArma tipo); // así lo heredan las derivadas, pero no se puede instanciar
+    virtual ~ItemMagico() = default;
 };
 //_________________BASTON_________________________________________
 class Baston : public ItemMagico
@@ -34,7 +35,7 @@ private:
     float porcentaje_canalizacion;
     int rango_ataque;
 
-    void amplificar_magia();  // Multiplica el daño mágico momentáneamente
+    void amplificar_magia(); // Multiplica el daño mágico momentáneamente
     void tallar_nueva_madera();
 
 public:
@@ -53,9 +54,8 @@ private:
     float desgaste_magia;
     int dificultad_lectura;
 
-    void revelar_pagina();                       // Desbloquea una nueva página (nivel)
-    void corromper_libro();                      // Transforma el libro (a oscuro)
-
+    void revelar_pagina();  // Desbloquea una nueva página (nivel)
+    void corromper_libro(); // Transforma el libro (a oscuro)
 
 public:
     LibroHechizos(string nombre);
@@ -63,7 +63,6 @@ public:
     void desgaste() override; // cuando se ataca se va a llamar a este metodo
     void mejorar() override;  // cambia atributos del arma
     int atacar() override;    // devuleve el daño del ataque
-
 };
 
 //_________________POCION_________________________________________
@@ -76,10 +75,11 @@ private:
     int nivel_fabricacion; // Nivel del alquimista o método usado (afecta consistencia)
     bool sellada;          // si esta abierta va bajando el daño
 
-    void consumir();                // Reduce la cantidad_restante
-    void sellar();                  // Marca la poción como sellada
-    void abrir();                   // Marca la poción como abierta
-    void mejorar_pureza();  
+    void consumir(); // Reduce la cantidad_restante
+    void sellar();   // Marca la poción como sellada
+    void abrir();    // Marca la poción como abierta
+    void mejorar_pureza();
+
 public:
     Pocion(string nombre);
     void desgaste() override; // cuando se ataca se va a llamar a este metodo
@@ -91,16 +91,16 @@ public:
 class Amuleto : public ItemMagico
 {
 private:
-    float sintonizacion; // cada vez que lo usa sube el nivel
-    int carga_magica;        // Energía almacenada (para activación futura)
-    bool esta_activado;      // Estado del amuleto (activo o pasivo)
-    int nivel_conservacion;  // Grado de desgaste material (afecta durabilidad)
+    float sintonizacion;    // cada vez que lo usa sube el nivel
+    int carga_magica;       // Energía almacenada (para activación futura)
+    bool esta_activado;     // Estado del amuleto (activo o pasivo)
+    int nivel_conservacion; // Grado de desgaste material (afecta durabilidad)
 
-    void activar();                 // Activa el amuleto si tiene carga
-    void desactivar();             // Desactiva el amuleto
+    void activar();    // Activa el amuleto si tiene carga
+    void desactivar(); // Desactiva el amuleto
     void recargar();   // Aumenta la carga_magica hasta cierto límite
-    void calibrar();               // Mejora la sintonización con el portador
-    void conservar();              // Reduce el desgaste del objeto
+    void calibrar();   // Mejora la sintonización con el portador
+    void conservar();  // Reduce el desgaste del objeto
 public:
     Amuleto(string nombre);
     void desgaste() override; // cuando se ataca se va a llamar a este metodo

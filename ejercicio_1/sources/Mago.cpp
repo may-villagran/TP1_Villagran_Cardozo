@@ -7,8 +7,8 @@ using namespace std;
 Mago::Mago(string nombre, TipoArma item_compatible) : nivel_mago(0),
                                                       hp(80),
                                                       daño_magico(10),
-                                                      hay_item_compatible(false),
                                                       compatible(item_compatible),
+                                                      hay_item_compatible(false),
                                                       nombre(nombre)
 {
 }

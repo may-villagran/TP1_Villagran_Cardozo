@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <iostream>
+#include "IArma.hpp"
 using namespace std;
 
 

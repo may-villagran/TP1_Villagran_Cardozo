@@ -20,6 +20,7 @@ protected:
 
     Mago(string nombre, TipoArma item_compatible, vector<unique_ptr<IArma>> arma); // constructor con arma
     Mago(string nombre, TipoArma item_compatible);
+    virtual ~Mago() = default;
     virtual void aprender_habilidades() = 0; // Método virtual puro
 public:
     string nombre;
