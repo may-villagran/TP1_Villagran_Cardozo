@@ -1,5 +1,4 @@
 #include "../include/Mago.hpp"
-
 #include <iostream>
 using namespace std;
 

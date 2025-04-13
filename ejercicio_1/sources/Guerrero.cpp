@@ -1,5 +1,4 @@
 #include "../include/Guerrero.hpp"
-#include "../include/IArma.hpp"
 #include <iostream>
 using namespace std;
 
@@ -54,8 +53,8 @@ void Guerrero::mostrar_info()
 {
     cout << "Nombre: " << nombre << endl;
     cout << "HP: " << hp << endl;
-    cout << "Daño mágico: " << daño_ataque << endl;
-    cout << "Nivel de mago: " << nivel_guerrero << endl;
+    cout << "Daño de ataque: " << daño_ataque << endl;
+    cout << "Nivel de guerreo: " << nivel_guerrero << endl;
     cout << "Tiene item compatible: " << (hay_arma_compatible ? "Sí" : "No") << endl;
 }
 

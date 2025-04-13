@@ -3,12 +3,12 @@
 using namespace std;
 
 // Constructor base,usado en las clases derivadas
-ItemMagico::ItemMagico(string nombre, TipoArma tipo) : nombre(nombre),
-                                                       tipo_objeto(tipo),
-                                                       roto(false),
-                                                       durabilidad(100),
+ItemMagico::ItemMagico(string nombre, TipoArma tipo) : durabilidad(100),
                                                        daño_base(10),
-                                                       desgaste_uso(0.1) {}
+                                                       desgaste_uso(0.1),
+                                                       nombre(nombre),
+                                                       tipo_objeto(tipo),
+                                                       roto(false) {}
 
 // Obtener durabilidad del objeto mágico
 int ItemMagico::get_duarbilidad()
