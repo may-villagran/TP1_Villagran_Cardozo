@@ -46,8 +46,8 @@ void Guerrero::set_armas(unique_ptr<IArma> arma)
         cerr << "Ya cuenta con las armas suficientes." << endl;
     else
     {
-        armas_poseidas.push_back(move(arma));
         hay_arma_compatible = arma->get_tipo() == arma_compatible ? true : false;
+        armas_poseidas.push_back(move(arma));
     }
 }
 void Guerrero::mostrar_info()

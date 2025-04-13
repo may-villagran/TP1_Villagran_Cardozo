@@ -44,8 +44,8 @@ void Mago::set_armas(unique_ptr<IArma> arma)
         cerr << "Ya cuenta con las armas suficientes." << endl;
     else
     {
-        armas_poseidas.push_back(move(arma));
         hay_item_compatible = arma->get_tipo() == compatible ? true : false;
+        armas_poseidas.push_back(move(arma));
     }
 }
 
