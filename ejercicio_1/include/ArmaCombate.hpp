@@ -11,7 +11,9 @@ protected:
     bool roto;
 
     ArmaCombate(string nombre); // se puede heredar pero no usar
+    void mostrar_info_arma() override final;//info generica
     virtual ~ArmaCombate() = default;
+
 
 public:
     string nombre;
@@ -22,6 +24,7 @@ public:
     virtual int atacar() = 0;
     virtual void desgaste() = 0;
     virtual void mejorar() = 0;
+    virtual void mostrar_info() =0;//mostrar info específica
 };
 
 //_________________LANZA_________________
@@ -43,6 +46,7 @@ public:
     void desgaste() override;
     void mejorar() override;
     int atacar() override;
+    void mostrar_info() override;
 };
 
 //_________________HACHA SIMPLE_________________
@@ -63,6 +67,7 @@ public:
     void desgaste() override;
     void mejorar() override;
     int atacar() override;
+    void mostrar_info() override;
 };
 
 //_________________HACHA DOBLE_________________
@@ -84,6 +89,7 @@ public:
     void desgaste() override;
     void mejorar() override;
     int atacar() override;
+    void mostrar_info() override;
 };
 
 //_____GARROTE_______________________
@@ -106,6 +112,7 @@ public:
     void desgaste() override;
     void mejorar() override;
     int atacar() override;
+    void mostrar_info() override;
 };
 
 //___________ESPADA___________________--
@@ -128,4 +135,5 @@ public:
     void desgaste() override;
     void mejorar() override;
     int atacar() override;
+    void mostrar_info() override;
 };

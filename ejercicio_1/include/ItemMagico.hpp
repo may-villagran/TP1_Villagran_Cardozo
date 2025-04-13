@@ -6,6 +6,14 @@
 // enum de tipos de pociones
 class ItemMagico : public IArma
 {
+protected:
+    int durabilidad;
+    int daño_base;
+    float desgaste_uso;
+    ItemMagico(string nombre, TipoArma tipo); // así lo heredan las derivadas, pero no se puede instanciar
+    void mostrar_info_arma() override final;
+    virtual ~ItemMagico() = default;
+
 public:
     string nombre;
     TipoArma tipo_objeto;
@@ -17,13 +25,7 @@ public:
     virtual int atacar() = 0;
     virtual void desgaste() = 0;
     virtual void mejorar() = 0;
-
-protected:
-    int durabilidad;
-    int daño_base;
-    float desgaste_uso;
-    ItemMagico(string nombre, TipoArma tipo); // así lo heredan las derivadas, pero no se puede instanciar
-    virtual ~ItemMagico() = default;
+    virtual void mostrar_info() =0;//mostrar info específica
 };
 //_________________BASTON_________________________________________
 class Baston : public ItemMagico
@@ -43,6 +45,7 @@ public:
     void desgaste() override; // cuando se ataca se va a llamar a este metodo
     void mejorar() override;  // cambia atributos del arma
     int atacar() override;    // devuleve el daño del ataque
+    void mostrar_info() override;
 };
 //_________________LIBRO DE HECHIZOS_________________________________________
 class LibroHechizos : public ItemMagico
@@ -54,14 +57,16 @@ private:
     float desgaste_magia;
     int dificultad_lectura;
 
-    void revelar_pagina(); 
-    void corromper_libro(); 
+    void revelar_pagina();
+    void corromper_libro();
+
 public:
     LibroHechizos(string nombre);
     // sobreescrita
     void desgaste() override; // cuando se ataca se va a llamar a este metodo
     void mejorar() override;  // cambia atributos del arma
     int atacar() override;    // devuleve el daño del ataque
+    void mostrar_info() override;
 };
 
 //_________________POCION_________________________________________
@@ -84,6 +89,7 @@ public:
     void desgaste() override; // cuando se ataca se va a llamar a este metodo
     void mejorar() override;  // cambia atributos del arma
     int atacar() override;    // devuleve el daño del ataque
+    void mostrar_info() override;
 };
 
 //_________________AMULETO_________________________________________
@@ -105,6 +111,7 @@ public:
     void desgaste() override; // cuando se ataca se va a llamar a este metodo
     void mejorar() override;  // cambia atributos del arma
     int atacar() override;    // devuleve el daño del ataque
+    void mostrar_info() override;
 };
 
 /*

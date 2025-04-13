@@ -10,6 +10,7 @@ class IArma
     virtual void desgaste() = 0;      // cuando se ataca se va a llamar a este metodo
     virtual void mejorar() = 0;       // cambia atributos del arma
     virtual TipoArma get_tipo()= 0;
+    virtual void mostrar_info_arma() = 0;
     virtual ~IArma() = default;
 
 };

@@ -4,11 +4,11 @@ using namespace std;
 
 // Constructor base,usado en las clases derivadas
 ItemMagico::ItemMagico(string nombre, TipoArma tipo) : nombre(nombre),
-                                        tipo_objeto(tipo),
-                                        roto(false),
-                                        durabilidad(100),
-                                        daño_base(10),
-                                        desgaste_uso(0.1) {}
+                                                       tipo_objeto(tipo),
+                                                       roto(false),
+                                                       durabilidad(100),
+                                                       daño_base(10),
+                                                       desgaste_uso(0.1) {}
 
 // Obtener durabilidad del objeto mágico
 int ItemMagico::get_duarbilidad()
@@ -16,8 +16,16 @@ int ItemMagico::get_duarbilidad()
     return durabilidad;
 }
 
-TipoArma ItemMagico::get_tipo(){
+TipoArma ItemMagico::get_tipo()
+{
     return tipo_objeto;
+}
+void ItemMagico::mostrar_info_arma()
+{
+    cout << "Nombre: " << nombre << "\n";
+    cout << "Tipo: " << tipo_arma_str(tipo_objeto) << " (Item Mágico)\n";
+    cout << "Daño base: " << daño_base << "\n";
+    cout << "Durabilidad: " << durabilidad << (roto ? " (ROTO)\n" : "\n");
 }
 
 //_________________BASTON_________________
@@ -60,6 +68,15 @@ int Baston::atacar()
     }
     desgaste();
     return static_cast<int>(daño_base + golpe_baston * 0.2);
+}
+void Baston::mostrar_info()
+{
+    ItemMagico::mostrar_info_arma();
+    cout << "Madera utilizada: " << tipo_madera_str(madera) << "\n";
+    cout << "Golpe del bastón: " << golpe_baston << "\n";
+    cout << "Amplificador elemental: " << amplificador_elemental << "\n";
+    cout << "Porcentaje de canalización: " << porcentaje_canalizacion << "%\n";
+    cout << "Rango de ataque: " << rango_ataque << "\n";
 }
 
 void Baston::amplificar_magia()
@@ -123,6 +140,15 @@ int LibroHechizos::atacar()
     int daño_maligno = es_maligno ? 5 : 0; // sin el libro es maligno tengo 5 de dañó
     return static_cast<int>(daño_base + numero_hechizos * 0.2 + daño_maligno * 0.24);
 }
+void LibroHechizos::mostrar_info()
+{
+    ItemMagico::mostrar_info_arma();
+    cout << "Número de hechizos: " << numero_hechizos << "\n";
+    cout << "Páginas ocultas: " << paginas_ocultas << "\n";
+    cout << "¿Es maligno?: " << (es_maligno ? "Sí" : "No") << "\n";
+    cout << "Desgaste de magia: " << desgaste_magia << "\n";
+    cout << "Dificultad de lectura: " << dificultad_lectura << "\n";
+}
 
 void LibroHechizos::revelar_pagina()
 {
@@ -172,6 +198,15 @@ int Pocion::atacar()
     }
     desgaste();
     return static_cast<int>(daño_base + calidad * pureza_magica);
+}
+void Pocion::mostrar_info()
+{
+    ItemMagico::mostrar_info_arma();
+    cout << "Efecto de la poción: " << tipo_efecto_str(efecto_posion) << "\n";
+    cout << "Calidad del brebaje: " << calidad << "/10\n";
+    cout << "Pureza mágica: " << pureza_magica << "%\n";
+    cout << "Nivel de fabricación: " << nivel_fabricacion << "\n";
+    cout << "¿Está sellada?: " << (sellada ? "Sí" : "No") << "\n";
 }
 
 // Métodos privados de Pocion
@@ -237,6 +272,14 @@ int Amuleto::atacar()
     }
     desgaste();
     return static_cast<int>(daño_base + sintonizacion * 0.2);
+}
+void Amuleto::mostrar_info()
+{
+    ItemMagico::mostrar_info_arma();
+    cout << "Nivel de sintonización: " << sintonizacion << "\n";
+    cout << "Carga mágica: " << carga_magica << "\n";
+    cout << "¿Está activado?: " << (esta_activado ? "Sí" : "No") << "\n";
+    cout << "Nivel de conservación: " << nivel_conservacion << "\n";
 }
 
 // Métodos privados de Amuleto
