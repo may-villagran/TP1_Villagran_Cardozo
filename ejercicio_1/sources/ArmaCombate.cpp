@@ -3,11 +3,13 @@
 using namespace std;
 
 // Constructor base de ArmaCombate
-ArmaCombate::ArmaCombate(string nombre) : durabilidad(100),
-                                          daño_base(10),
-                                          roto(false),
-                                          nombre(nombre){}
-TipoArma ArmaCombate::get_tipo(){
+ArmaCombate::ArmaCombate(string nombre, TipoArma tipo) : tipo_arma_combate(tipo),
+                                                         durabilidad(100),
+                                                         daño_base(10),
+                                                         roto(false),
+                                                         nombre(nombre) {}
+TipoArma ArmaCombate::get_tipo()
+{
     return tipo_arma_combate;
 }
 
@@ -16,18 +18,18 @@ int ArmaCombate::get_duarbilidad()
 {
     return durabilidad;
 }
-void ArmaCombate::mostrar_info() {
-    cout << " Nombre del arma: " << nombre << endl;
-    cout << " Tipo de arma: " << tipo_arma_str(tipo_arma_combate) << endl;
-    cout << " Daño base: " << daño_base << endl;
-    cout << " Durabilidad: " << durabilidad << endl;
-    cout << " Estado: " << (roto ? "Rota" : "Operativa") << endl;
+void ArmaCombate::mostrar_info()
+{
+    cout << "Nombre del arma: " << nombre << endl;
+    cout << "Tipo de arma: " << tipo_arma_str(tipo_arma_combate) << endl;
+    cout << "Daño base: " << daño_base << endl;
+    cout << "Durabilidad: " << durabilidad << endl;
+    cout << "Estado: " << (roto ? "Rota" : "Operativa") << endl;
 }
-
 
 //_________________LANZA_________________
 
-Lanza::Lanza(string nombre) : ArmaCombate(nombre),
+Lanza::Lanza(string nombre) : ArmaCombate(nombre, TipoArma::LANZA),
                               asta(TipoMadera::HAYA), // empiezan por los mas bajos
                               punta(TipoMetal::COBRE),
                               punta_penetracion(1.5),
@@ -68,7 +70,8 @@ int Lanza::atacar()
     desgaste();
     return static_cast<int>(daño_base + punta_penetracion * 0.2);
 }
-void Lanza::mostrar_info() {
+void Lanza::mostrar_info()
+{
     ArmaCombate::mostrar_info();
     cout << "Asta de madera: " << tipo_madera_str(asta) << "\n";
     cout << "Punta de metal: " << tipo_metal_str(punta) << "\n";
@@ -76,7 +79,6 @@ void Lanza::mostrar_info() {
     cout << "¿Hoja reforzada?: " << (hoja_reforzada ? "Sí" : "No") << "\n";
     cout << "Flexibilidad del asta: " << flexibilidad_asta << "\n";
 }
-
 
 // Métodos privados de Lanza
 void Lanza::templar_hoja()
@@ -113,7 +115,7 @@ void Lanza::reforzar_punta()
 
 //_________________HACHA SIMPLE_________________
 
-HachaSimple::HachaSimple(string nombre) : ArmaCombate(nombre),
+HachaSimple::HachaSimple(string nombre) : ArmaCombate(nombre, TipoArma::HACHA_SIMPLE),
                                           filo(TipoMetal::COBRE),
                                           mango(TipoMadera::HAYA),
                                           filo_corte(1.2),
@@ -154,14 +156,14 @@ int HachaSimple::atacar()
     desgaste();
     return static_cast<int>(daño_base + filo_corte * 0.2);
 }
-void HachaSimple::mostrar_info() {
+void HachaSimple::mostrar_info()
+{
     ArmaCombate::mostrar_info();
     cout << "Filo de metal: " << tipo_metal_str(filo) << "\n";
     cout << "Mango de madera: " << tipo_madera_str(mango) << "\n";
     cout << "Corte del filo: " << filo_corte << "\n";
     cout << "Calidad del ensamble: " << calidad_ensamble << "\n";
 }
-
 
 // Métodos privados de HachaSimple
 void HachaSimple::afilar_hoja()
@@ -183,7 +185,7 @@ void HachaSimple::barnizar_mago()
 
 //_________________HACHA DOBLE_________________
 
-HachaDoble::HachaDoble(string nombre) : ArmaCombate(nombre),
+HachaDoble::HachaDoble(string nombre) : ArmaCombate(nombre, TipoArma::HACHA_DOBLE),
                                         filos(TipoMetal::COBRE),
                                         mango(TipoMadera::HAYA),
                                         filo_doble_1(1.5),
@@ -223,7 +225,8 @@ int HachaDoble::atacar()
     desgaste();
     return static_cast<int>(daño_base + (filo_doble_1 + filo_doble_2) * 0.2);
 }
-void HachaDoble::mostrar_info() {
+void HachaDoble::mostrar_info()
+{
     ArmaCombate::mostrar_info();
     cout << "Filos de metal: " << tipo_metal_str(filos) << "\n";
     cout << "Mango de madera: " << tipo_madera_str(mango) << "\n";
@@ -231,7 +234,6 @@ void HachaDoble::mostrar_info() {
     cout << "Filo doble 2: " << filo_doble_2 << "\n";
     cout << "Resistencia de las hojas: " << resistencia_hojas << "\n";
 }
-
 
 // Métodos privados de HachaDoble
 void HachaDoble::afilar_lados()
@@ -254,7 +256,7 @@ void HachaDoble::mejorar_mango()
 
 //_________________GARROTE_________________
 
-Garrote::Garrote(string nombre) : ArmaCombate(nombre),
+Garrote::Garrote(string nombre) : ArmaCombate(nombre, TipoArma::GARROTE),
                                   madera_principal(TipoMadera::HAYA),
                                   peso_golpe(2.5),
                                   densidad_madera(0.8),
@@ -293,7 +295,8 @@ int Garrote::atacar()
     desgaste();
     return static_cast<int>(daño_base + peso_golpe * 0.2);
 }
-void Garrote::mostrar_info() {
+void Garrote::mostrar_info()
+{
     ArmaCombate::mostrar_info();
     cout << "Madera principal: " << tipo_madera_str(madera_principal) << "\n";
     cout << "Peso del golpe: " << peso_golpe << "\n";
@@ -301,7 +304,6 @@ void Garrote::mostrar_info() {
     cout << "¿Tiene revestimiento?: " << (tiene_revestimiento ? "Sí" : "No") << "\n";
     cout << "Calidad del tallado: " << calidad_tallado << "\n";
 }
-
 
 // Métodos privados de Garrote
 void Garrote::reforzar_madera()
@@ -334,7 +336,7 @@ void Garrote::calibrar_peso()
 //_________________ESPADA_________________///
 
 // Constructor de Espada
-Espada::Espada(string nombre) : ArmaCombate(nombre),
+Espada::Espada(string nombre) : ArmaCombate(nombre, TipoArma::ESPADA),
                                 filo(TipoMetal::HIERRO),
                                 empuñadura(TipoMadera::ROBLE),
                                 filo_corte(1.5),
@@ -386,7 +388,8 @@ int Espada::atacar()
     cout << "La espada " << nombre << " ha atacado causando " << daño << " de daño." << endl;
     return daño;
 }
-void Espada::mostrar_info() {
+void Espada::mostrar_info()
+{
     ArmaCombate::mostrar_info();
     cout << "Filo de metal: " << tipo_metal_str(filo) << "\n";
     cout << "Empuñadura de madera: " << tipo_madera_str(empuñadura) << "\n";
@@ -394,7 +397,6 @@ void Espada::mostrar_info() {
     cout << "Calidad de la empuñadura: " << calidad_empuñadura << "\n";
     cout << "¿Tiene guarda?: " << (tiene_guarda ? "Sí" : "No") << "\n";
 }
-
 
 // Métodos privados de Espada
 void Espada::afilar_filo()

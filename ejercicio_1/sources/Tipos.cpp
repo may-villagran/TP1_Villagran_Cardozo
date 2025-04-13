@@ -1,4 +1,4 @@
-#include "./include/Tipos.hpp"
+#include "../include/Tipos.hpp"
 string tipo_arma_str(TipoArma tipo) {
     switch (tipo) {
         case TipoArma::BASTON: return "Bastón";

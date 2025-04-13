@@ -31,6 +31,7 @@ void ItemMagico::mostrar_info()
 //_________________BASTON_________________
 
 Baston::Baston(string nombre) : ItemMagico(nombre, TipoArma::BASTON),
+                                madera(TipoMadera::HAYA),
                                 golpe_baston(5.0),
                                 amplificador_elemental(1.2),
                                 porcentaje_canalizacion(0.8),
@@ -166,6 +167,7 @@ void LibroHechizos::corromper_libro()
 //_________________POCION_________________
 
 Pocion::Pocion(string nombre) : ItemMagico(nombre, TipoArma::POCION),
+                                efecto_posion(TipoEfecto::CURACION),
                                 calidad(8),
                                 pureza_magica(0.9),
                                 nivel_fabricacion(3),

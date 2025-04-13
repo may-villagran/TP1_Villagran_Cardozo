@@ -10,7 +10,7 @@ protected:
     int daño_base;
     bool roto;
 
-    ArmaCombate(string nombre); // se puede heredar pero no usar
+    ArmaCombate(string nombre, TipoArma tipo); // se puede heredar pero no usar
     virtual ~ArmaCombate() = default;
 
 
