@@ -1,11 +1,12 @@
 #pragma once
 #include <memory>
 //inclusion de las clases
-#include "../ejercicio_1/include/Guerrero.hpp"
-#include "../ejercicio_1/include/Mago.hpp"
-#include "../ejercicio_1/include/ArmaCombate.hpp"
-#include "../ejercicio_1/include/ItemMagico.hpp"
-#include "../ejercicio_1/include/Tipos.hpp"
+//sale primero de la carpeta include y sale de ejericicio_2
+#include "../../ejercicio_1/include/Guerrero.hpp"
+#include "../../ejercicio_1/include/Mago.hpp"
+#include "../../ejercicio_1/include/ArmaCombate.hpp"
+#include "../../ejercicio_1/include/ItemMagico.hpp"
+#include "../../ejercicio_1/include/Tipos.hpp"
 
 
 using namespace std;
