@@ -1,4 +1,6 @@
 #include "menu.hpp"
+#include <limits>
+using namespace std;
 void menu_creacion_armas()
 {
     cout << "\nSeleccione el tipo de arma:" << endl;
@@ -46,9 +48,9 @@ vector<unique_ptr<IArma>> seleccionar_armas(int cantidad_armas)
         menu_creacion_armas();
         cin >> opcion;
         cout << "Escriba el nombre del arma: ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         string nombre;
-        cin.ignore(); // Ignorar el salto de linea
-        getline(cin, nombre); // Leer toda la línea, incluyendo espacios, sino se rompe
+        getline(cin, nombre); // Lee toda la línea
 
         switch (opcion)
         {
@@ -90,22 +92,21 @@ vector<unique_ptr<IArma>> seleccionar_armas(int cantidad_armas)
 }
 
 //_________________Gestion de creacion de personajes___________________________
-//si el personaje no tiene arma, usa el metodo factory sin armas
+// si el personaje no tiene arma, usa el metodo factory sin armas
 unique_ptr<IPersonaje> crear_personaje_mago(int cantidad_armas)
 {
     int opcion;
-    string nombre;
-    
-
     menu_creacion_mago();
     cin >> opcion;
+
     cout << "Ingrese el nombre del personaje: ";
-    cin.ignore(); // Ignorar el salto de linea
-    getline(cin, nombre); // Leer toda la línea, incluyendo espacios, sino se rompe
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    string nombre;
+    getline(cin, nombre); // Lee toda la línea
 
     if (cantidad_armas == 0)
     {
-        cout<<"El personaje no tendrá armas"<<endl;
+        cout << "El personaje no tendrá armas" << endl;
         switch (static_cast<TipoPersonaje>(opcion))
         {
         case TipoPersonaje::HECHICERO:
@@ -144,16 +145,16 @@ unique_ptr<IPersonaje> crear_personaje_mago(int cantidad_armas)
 unique_ptr<IPersonaje> crear_personaje_guerrero(int cantidad_armas)
 {
     int opcion;
-    string nombre;
     menu_creacion_guerrero();
     cin >> opcion;
     cout << "Ingrese el nombre del personaje: ";
-    cin.ignore();
-    getline(cin, nombre);
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // sino me toma el salto como nombre
+    string nombre;
+    getline(cin, nombre); // Lee toda la línea
 
     if (cantidad_armas == 0)
     {
-        cout<<"El personaje no tendrá armas"<<endl;
+        cout << "El personaje no tendrá armas" << endl;
         switch (static_cast<TipoPersonaje>(opcion + 4))
         {
         case TipoPersonaje::BARBARO:
