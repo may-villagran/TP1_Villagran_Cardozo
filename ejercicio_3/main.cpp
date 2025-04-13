@@ -38,16 +38,23 @@ unique_ptr<IPersonaje> eleccion_personaje(int opcion)
     }
 }
 
-unique_ptr<IPersonaje> adversario_random(){
-    int tipo= rand()%10 + 1;//obtengo de 1 al 9 elegir el tipo
-    unique_ptr<IPersonaje> adversario = PersonajeFactory::creacion_personaje("adversario", static_cast<TipoPersonaje>(tipo));
-    tipo= rand()%10 + 1; //vuelvo a generar para el arma
-    unique_ptr<IArma> arma_adversario = PersonajeFactory::creacion_arma("arma adversario", static_cast<TipoArma>(tipo));
-    adversario->set_armas(move(arma_adversario)); //seteo el arma del personaje con su metodo
+
+unique_ptr<IPersonaje> adversario_random() {
+    // Generar tipo de personaje
+    srand(time(nullptr));
+    int tipo_personaje = rand() % 9 + 1; // Rango [1-9]
+    unique_ptr<IPersonaje> adversario = PersonajeFactory::creacion_personaje("adversario", static_cast<TipoPersonaje>(tipo_personaje));
+    if (!adversario) return nullptr;
+    // Generar tipo de arma
+    int tipo_arma = rand() % 9 + 1; // Rango [1-9]
+    unique_ptr<IArma> arma_adversario = PersonajeFactory::creacion_arma("arma adversario", static_cast<TipoArma>(tipo_arma));
+    if (!arma_adversario) return nullptr;
+    
+    adversario->set_armas(move(arma_adversario));
     return adversario;
 }
 
-Ataque obtener_ataque_jugador() {
+Ataque obtener_ataque_jugador(){
     int opcion;
     do {
         cout << "Elegí tu ataque:\n(1) Golpe Fuerte\n(2) Golpe Rápido\n(3) Defensa y Golpe\n> ";
@@ -81,8 +88,12 @@ int main()
         cin >> opcion;
         personaje_1 = eleccion_personaje(opcion);
     } while(!personaje_1);
+    personaje_1->mostrar_info();
 
-    personaje_2 = adversario_random();
+    /* do{
+        personaje_2 = adversario_random();
+    }while(!personaje_2);
+
     cout<<"Tu adversario es:"<<endl;
     personaje_2->mostrar_info();
 
@@ -91,7 +102,7 @@ int main()
         cout << "\nTu HP: " << personaje_1->getHP() << " | Adversario HP: " << personaje_2->getHP() << "\n";
     
         Ataque ataque_jugador = obtener_ataque_jugador();
-        Ataque ataque_enemigo = static_cast<Ataque>(rand() % 3 + 1);
+        Ataque ataque_enemigo = static_cast<Ataque>(rand() % 3 + 1);//seleciono un num rand
         cout << "\nUsaste un " << ataque_str(ataque_jugador) << " y el enemigo usó un " << ataque_str(ataque_enemigo) << ".\n";
     
         int resultado = calcular_daño(ataque_jugador, ataque_enemigo);
@@ -107,7 +118,7 @@ int main()
             cout << "Empate de ataques. Nadie recibe daño.\n";
         }
     
-    } while (personaje_1->getHP() > 0 && personaje_2->getHP() > 0);
+    } while (personaje_1->getHP() > 0 && personaje_2->getHP() > 0); */
     
 
 

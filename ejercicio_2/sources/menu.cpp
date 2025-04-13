@@ -37,48 +37,49 @@ void menu_creacion_guerrero()
     cout << "Ingrese su opción: ";
 }
 
-// gestion del pedido de armas
+// gestion del pedido de armas y creacoion de vector
 vector<unique_ptr<IArma>> seleccionar_armas(int cantidad_armas)
 {
     vector<unique_ptr<IArma>> armas;
 
     for (int i = 0; i < cantidad_armas; ++i)
     {
-        int opcion;
         menu_creacion_armas();
+        int opcion;
         cin >> opcion;
-        cout << "Escriba el nombre del arma: ";
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        string nombre;
-        getline(cin, nombre); // Lee toda la línea
 
-        switch (opcion)
+        cout << "Escriba el nombre del arma (no deben haber espacios): ";
+        string nombre;
+        cin.ignore();         // Limpia cualquier carácter restante en el búfer de entrada
+        getline(cin, nombre); // Ahora debería capturar toda la línea, incluso con espacios
+
+        switch (static_cast<TipoArma>(opcion))
         {
-        case 1:
+        case TipoArma::BASTON:
             armas.push_back(PersonajeFactory::creacion_arma(nombre, TipoArma::BASTON));
             break;
-        case 2:
+        case TipoArma::LIBRO_HECHIZOS:
             armas.push_back(PersonajeFactory::creacion_arma(nombre, TipoArma::LIBRO_HECHIZOS));
             break;
-        case 3:
+        case TipoArma::POCION:
             armas.push_back(PersonajeFactory::creacion_arma(nombre, TipoArma::POCION));
             break;
-        case 4:
+        case TipoArma::AMULETO:
             armas.push_back(PersonajeFactory::creacion_arma(nombre, TipoArma::AMULETO));
             break;
-        case 5:
+        case TipoArma::HACHA_SIMPLE:
             armas.push_back(PersonajeFactory::creacion_arma(nombre, TipoArma::HACHA_SIMPLE));
             break;
-        case 6:
+        case TipoArma::HACHA_DOBLE:
             armas.push_back(PersonajeFactory::creacion_arma(nombre, TipoArma::HACHA_DOBLE));
             break;
-        case 7:
+        case TipoArma::ESPADA:
             armas.push_back(PersonajeFactory::creacion_arma(nombre, TipoArma::ESPADA));
             break;
-        case 8:
+        case TipoArma::LANZA:
             armas.push_back(PersonajeFactory::creacion_arma(nombre, TipoArma::LANZA));
             break;
-        case 9:
+        case TipoArma::GARROTE:
             armas.push_back(PersonajeFactory::creacion_arma(nombre, TipoArma::GARROTE));
             break;
         default:
@@ -87,7 +88,6 @@ vector<unique_ptr<IArma>> seleccionar_armas(int cantidad_armas)
             break;
         }
     }
-
     return armas;
 }
 
@@ -97,12 +97,12 @@ unique_ptr<IPersonaje> crear_personaje_mago(int cantidad_armas)
 {
     int opcion;
     menu_creacion_mago();
-    cin >> opcion;
+    cin >> opcion;//pido la opcion de personaje
 
     cout << "Ingrese el nombre del personaje: ";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     string nombre;
-    getline(cin, nombre); // Lee toda la línea
+    cin.ignore();         // Limpia cualquier carácter restante en el búfer de entrada
+    getline(cin, nombre); // Ahora debería capturar toda la línea, incluso con espacios
 
     if (cantidad_armas == 0)
     {
@@ -148,9 +148,9 @@ unique_ptr<IPersonaje> crear_personaje_guerrero(int cantidad_armas)
     menu_creacion_guerrero();
     cin >> opcion;
     cout << "Ingrese el nombre del personaje: ";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // sino me toma el salto como nombre
     string nombre;
-    getline(cin, nombre); // Lee toda la línea
+    cin.ignore(); // Limpia cualquier carácter restante en el búfer de entrada
+    getline(cin, nombre); // Ahora debería capturar toda la línea, incluso con espacios
 
     if (cantidad_armas == 0)
     {

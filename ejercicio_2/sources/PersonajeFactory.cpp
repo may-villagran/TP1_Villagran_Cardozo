@@ -29,7 +29,7 @@ unique_ptr<IPersonaje> PersonajeFactory::creacion_personaje(string nombre, TipoP
         return make_unique<Gladiador>(nombre);
 
     default:
-        throw invalid_argument("Tipo de personaje desconocido");
+        return nullptr;
     }
 }
 unique_ptr<IArma> PersonajeFactory::creacion_arma(string nombre, TipoArma arma)
@@ -58,9 +58,8 @@ unique_ptr<IArma> PersonajeFactory::creacion_arma(string nombre, TipoArma arma)
         return make_unique<Lanza>(nombre);
     case TipoArma::GARROTE:
         return make_unique<Garrote>(nombre);
-
     default:
-        throw invalid_argument("Tipo de arma desconocido");
+        return nullptr;
     }
 }
 // este llama a crear armas, así lo ya le paso al constructor de objetos el vector arma de unique
@@ -93,6 +92,6 @@ unique_ptr<IPersonaje> PersonajeFactory::creacion_personaje_armado(string nombre
     case TipoPersonaje::GLADIADOR:
         return make_unique<Gladiador>(nombre, move(armas_personaje));
     default:
-        throw invalid_argument("Tipo de personaje desconocido");
+        return nullptr;
     }
 }

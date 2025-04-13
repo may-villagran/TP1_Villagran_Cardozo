@@ -1,5 +1,5 @@
-#include "../include/PersonajeFactory.hpp"
-#include "../include/menu.hpp"
+#include "include/PersonajeFactory.hpp"
+#include "include/menu.hpp"
 #include <memory>
 #include <iostream>
 #include <cstdlib>  //uso de rand

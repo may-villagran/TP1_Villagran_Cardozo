@@ -38,7 +38,7 @@ void Mago::recibir_daño(int daño)
 void Mago::set_armas(unique_ptr<IArma> arma)
 {
     if (!arma)
-        throw invalid_argument("El arma que se está pasando es un puntero nulo.");
+        cerr<<"el arma no se pudo setear"<<endl;
     else if (armas_poseidas.size() >= 2)
         cerr << "Ya cuenta con las armas suficientes." << endl;
     else
