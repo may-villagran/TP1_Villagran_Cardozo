@@ -50,7 +50,7 @@ void Mago::set_armas(unique_ptr<IArma> arma)
 }
 
 
-void Mago::mostrar_info_personaje()
+void Mago::mostrar_info()
 {
     cout << "Nombre: " << nombre << endl;
     cout << "HP: " << hp << endl;

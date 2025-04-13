@@ -50,7 +50,7 @@ void Guerrero::set_armas(unique_ptr<IArma> arma)
         hay_arma_compatible = arma->get_tipo() == arma_compatible ? true : false;
     }
 }
-void Guerrero::mostrar_info_personaje()
+void Guerrero::mostrar_info()
 {
     cout << "Nombre: " << nombre << endl;
     cout << "HP: " << hp << endl;
@@ -106,7 +106,7 @@ void Barbaro::entrenar()
 
 void Barbaro::mostrar_info()
 {
-    Guerrero::mostrar_info_personaje();//muestro lo general
+    Guerrero::mostrar_info();//muestro lo general
     cout << "Fuerza bruta: " << fuerza_bruta << endl;
     cout << "Resistencia física: " << resistencia_física << endl;
     cout << "Velocidad de ataque: " << velocidad_ataque << endl;
@@ -180,7 +180,7 @@ void Paladin::entrenar()
 }
 void Paladin::mostrar_info()
 {
-    Guerrero::mostrar_info_personaje();//muestro lo general
+    Guerrero::mostrar_info();//muestro lo general
     cout << "Porcentaje de autocuración: " << porcentaje_autocuracion << "%" << endl;
     cout << "Fuerza: " << fuerza << endl;
     cout << "Porcentaje de agilidad: " << porcentaje_agilidad << "%" << endl;
@@ -253,7 +253,7 @@ void Caballero::entrenar()
 }
 void Caballero::mostrar_info()
 {
-    Guerrero::mostrar_info_personaje();//muestro lo general
+    Guerrero::mostrar_info();//muestro lo general
     cout << "Precisión: " << precision << endl;
     cout << "Velocidad de ataque: " << velocidad_ataque << endl;
     cout << "Resistencia: " << resistencia << endl;
@@ -343,7 +343,7 @@ void Mercenario::entrenar()
 }
 void Mercenario::mostrar_info()
 {
-    Guerrero::mostrar_info_personaje();//muestro lo general
+    Guerrero::mostrar_info();//muestro lo general
     cout << "Destreza en combate: " << destreza_combate << endl;
     cout << "Rapidez de golpe: " << rapidez_golpe << endl;
     cout << "Evasión de ataques: " << (evasion_ataques ? "Sí" : "No") << endl;
@@ -423,7 +423,7 @@ void Gladiador::entrenar()
 }
 void Gladiador::mostrar_info()
 {
-    Guerrero::mostrar_info_personaje();//muestro lo general
+    Guerrero::mostrar_info();//muestro lo general
     cout << "Fuerza alta: " << fuerza_alta << endl;
     cout << "Resistencia: " << resistencia << endl;
     cout << "Supervivencia activa: " << (supervivencia ? "Sí" : "No") << endl;

@@ -23,10 +23,6 @@ protected:
     virtual ~Guerrero() = default;
     //funciones que obligo a las derivadas a implementar
     virtual void entrenar() = 0;
-    void mostrar_info_personaje() override final; //muestra la info generica
-    
-    
-
 public:
     string nombre;
 

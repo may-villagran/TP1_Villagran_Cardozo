@@ -22,7 +22,6 @@ protected:
     Mago(string nombre, TipoArma item_compatible);
     virtual ~Mago() = default;
     virtual void aprender_habilidades() = 0;      // Método virtual puro
-    void mostrar_info_personaje() override final; // mostrar info base
 public:
     string nombre;
     // Métodos que no dependen de la clase derivada

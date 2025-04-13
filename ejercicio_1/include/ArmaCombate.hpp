@@ -11,7 +11,6 @@ protected:
     bool roto;
 
     ArmaCombate(string nombre); // se puede heredar pero no usar
-    void mostrar_info_arma() override final;//info generica
     virtual ~ArmaCombate() = default;
 
 

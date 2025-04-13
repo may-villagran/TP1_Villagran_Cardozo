@@ -16,7 +16,7 @@ int ArmaCombate::get_duarbilidad()
 {
     return durabilidad;
 }
-void ArmaCombate::mostrar_info_arma() {
+void ArmaCombate::mostrar_info() {
     cout << " Nombre del arma: " << nombre << endl;
     cout << " Tipo de arma: " << tipo_arma_str(tipo_arma_combate) << endl;
     cout << " Daño base: " << daño_base << endl;
@@ -69,7 +69,7 @@ int Lanza::atacar()
     return static_cast<int>(daño_base + punta_penetracion * 0.2);
 }
 void Lanza::mostrar_info() {
-    ArmaCombate::mostrar_info_arma();
+    ArmaCombate::mostrar_info();
     cout << "Asta de madera: " << tipo_madera_str(asta) << "\n";
     cout << "Punta de metal: " << tipo_metal_str(punta) << "\n";
     cout << "Penetración de la punta: " << punta_penetracion << "\n";
@@ -155,7 +155,7 @@ int HachaSimple::atacar()
     return static_cast<int>(daño_base + filo_corte * 0.2);
 }
 void HachaSimple::mostrar_info() {
-    ArmaCombate::mostrar_info_arma();
+    ArmaCombate::mostrar_info();
     cout << "Filo de metal: " << tipo_metal_str(filo) << "\n";
     cout << "Mango de madera: " << tipo_madera_str(mango) << "\n";
     cout << "Corte del filo: " << filo_corte << "\n";
@@ -224,7 +224,7 @@ int HachaDoble::atacar()
     return static_cast<int>(daño_base + (filo_doble_1 + filo_doble_2) * 0.2);
 }
 void HachaDoble::mostrar_info() {
-    ArmaCombate::mostrar_info_arma();
+    ArmaCombate::mostrar_info();
     cout << "Filos de metal: " << tipo_metal_str(filos) << "\n";
     cout << "Mango de madera: " << tipo_madera_str(mango) << "\n";
     cout << "Filo doble 1: " << filo_doble_1 << "\n";
@@ -294,7 +294,7 @@ int Garrote::atacar()
     return static_cast<int>(daño_base + peso_golpe * 0.2);
 }
 void Garrote::mostrar_info() {
-    ArmaCombate::mostrar_info_arma();
+    ArmaCombate::mostrar_info();
     cout << "Madera principal: " << tipo_madera_str(madera_principal) << "\n";
     cout << "Peso del golpe: " << peso_golpe << "\n";
     cout << "Densidad de la madera: " << densidad_madera << "\n";
@@ -387,7 +387,7 @@ int Espada::atacar()
     return daño;
 }
 void Espada::mostrar_info() {
-    ArmaCombate::mostrar_info_arma();
+    ArmaCombate::mostrar_info();
     cout << "Filo de metal: " << tipo_metal_str(filo) << "\n";
     cout << "Empuñadura de madera: " << tipo_madera_str(empuñadura) << "\n";
     cout << "Corte del filo: " << filo_corte << "\n";

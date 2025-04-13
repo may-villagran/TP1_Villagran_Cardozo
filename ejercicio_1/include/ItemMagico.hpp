@@ -11,7 +11,6 @@ protected:
     int daño_base;
     float desgaste_uso;
     ItemMagico(string nombre, TipoArma tipo); // así lo heredan las derivadas, pero no se puede instanciar
-    void mostrar_info_arma() override final;
     virtual ~ItemMagico() = default;
 
 public:

@@ -20,7 +20,7 @@ TipoArma ItemMagico::get_tipo()
 {
     return tipo_objeto;
 }
-void ItemMagico::mostrar_info_arma()
+void ItemMagico::mostrar_info()
 {
     cout << "Nombre: " << nombre << "\n";
     cout << "Tipo: " << tipo_arma_str(tipo_objeto) << " (Item Mágico)\n";
@@ -71,7 +71,7 @@ int Baston::atacar()
 }
 void Baston::mostrar_info()
 {
-    ItemMagico::mostrar_info_arma();
+    ItemMagico::mostrar_info();
     cout << "Madera utilizada: " << tipo_madera_str(madera) << "\n";
     cout << "Golpe del bastón: " << golpe_baston << "\n";
     cout << "Amplificador elemental: " << amplificador_elemental << "\n";
@@ -142,7 +142,7 @@ int LibroHechizos::atacar()
 }
 void LibroHechizos::mostrar_info()
 {
-    ItemMagico::mostrar_info_arma();
+    ItemMagico::mostrar_info();
     cout << "Número de hechizos: " << numero_hechizos << "\n";
     cout << "Páginas ocultas: " << paginas_ocultas << "\n";
     cout << "¿Es maligno?: " << (es_maligno ? "Sí" : "No") << "\n";
@@ -201,7 +201,7 @@ int Pocion::atacar()
 }
 void Pocion::mostrar_info()
 {
-    ItemMagico::mostrar_info_arma();
+    ItemMagico::mostrar_info();
     cout << "Efecto de la poción: " << tipo_efecto_str(efecto_posion) << "\n";
     cout << "Calidad del brebaje: " << calidad << "/10\n";
     cout << "Pureza mágica: " << pureza_magica << "%\n";
@@ -275,7 +275,7 @@ int Amuleto::atacar()
 }
 void Amuleto::mostrar_info()
 {
-    ItemMagico::mostrar_info_arma();
+    ItemMagico::mostrar_info();
     cout << "Nivel de sintonización: " << sintonizacion << "\n";
     cout << "Carga mágica: " << carga_magica << "\n";
     cout << "¿Está activado?: " << (esta_activado ? "Sí" : "No") << "\n";
