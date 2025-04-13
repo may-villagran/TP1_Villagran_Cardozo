@@ -19,8 +19,13 @@ protected:
     // pongo los contructores protected así no los, puedo llamar pero son privados para las derivdas
     Guerrero(string nombre, TipoArma arma_compatible);
     Guerrero(string nombre, TipoArma arma_compatible, vector<unique_ptr<IArma>> armas); // constructor con arma
+    
     virtual ~Guerrero() = default;
+    //funciones que obligo a las derivadas a implementar
     virtual void entrenar() = 0;
+    void mostrar_info_personaje() override final; //muestra la info generica
+    
+    
 
 public:
     string nombre;
@@ -32,8 +37,10 @@ public:
     // metodos que dependen de la clase derivada, las devo poner virtual
     virtual int atacar() =0; // depende de la clase derivada
     virtual void defender(int daño) =0;
+    virtual void mostrar_info() = 0;
 };
 
+// _________Barbaro____________
 class Barbaro : public Guerrero
 {
 private:
@@ -53,8 +60,9 @@ public:
     int atacar() override;
     void defender(int daño) override;
     void entrenar() override;
+    void mostrar_info() override;
 };
-
+//__________Paladin______________-
 class Paladin : public Guerrero
 {
 private:
@@ -76,6 +84,7 @@ public:
     int atacar() override;
     void defender(int daño) override;
     void entrenar() override;
+    void mostrar_info() override;
 };
 
 class Caballero : public Guerrero
@@ -103,6 +112,7 @@ public:
     int atacar() override;
     void defender(int daño) override;
     void entrenar() override;
+    void mostrar_info() override;
 };
 
 class Mercenario : public Guerrero
@@ -132,6 +142,7 @@ public:
     int atacar() override;
     void defender(int daño) override;
     void entrenar() override;
+    void mostrar_info() override;
 };
 
 class Gladiador : public Guerrero
@@ -157,4 +168,5 @@ public:
     int atacar() override;
     void defender(int daño) override;
     void entrenar() override;
+    void mostrar_info() override;
 };

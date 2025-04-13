@@ -50,8 +50,16 @@ void Guerrero::set_armas(unique_ptr<IArma> arma)
         hay_arma_compatible = arma->get_tipo() == arma_compatible ? true : false;
     }
 }
+void Guerrero::mostrar_info_personaje()
+{
+    cout << "Nombre: " << nombre << endl;
+    cout << "HP: " << hp << endl;
+    cout << "Daño mágico: " << daño_ataque << endl;
+    cout << "Nivel de mago: " << nivel_guerrero << endl;
+    cout << "Tiene item compatible: " << (hay_arma_compatible ? "Sí" : "No") << endl;
+}
 
-// Barbaro
+// _________Barbaro____________
 Barbaro::Barbaro(string nombre) : Guerrero(nombre, TipoArma::HACHA_DOBLE),
                                   fuerza_bruta(5),
                                   resistencia_física(3),
@@ -96,6 +104,16 @@ void Barbaro::entrenar()
     velocidad_ataque += 1;
 }
 
+void Barbaro::mostrar_info()
+{
+    Guerrero::mostrar_info_personaje();//muestro lo general
+    cout << "Fuerza bruta: " << fuerza_bruta << endl;
+    cout << "Resistencia física: " << resistencia_física << endl;
+    cout << "Velocidad de ataque: " << velocidad_ataque << endl;
+    cout << "Furia activa: " << (furia ? "Sí" : "No") << endl;
+    cout << "Daño extra: " << daño_extra << endl;
+}
+
 void Barbaro::activar_furia()
 {
     furia = true;
@@ -117,7 +135,7 @@ void Barbaro::regenerar_vida()
     cout << nombre << " ha regenerado vida!" << endl;
 }
 
-// Paladin
+// __________Paladin__________________
 Paladin::Paladin(string nombre) : Guerrero(nombre, TipoArma::HACHA_SIMPLE),
                                   porcentaje_autocuracion(0.05),
                                   fuerza(5),
@@ -160,6 +178,15 @@ void Paladin::entrenar()
     porcentaje_agilidad += 0.05;
     valor_proteccion += 0.05;
 }
+void Paladin::mostrar_info()
+{
+    Guerrero::mostrar_info_personaje();//muestro lo general
+    cout << "Porcentaje de autocuración: " << porcentaje_autocuracion << "%" << endl;
+    cout << "Fuerza: " << fuerza << endl;
+    cout << "Porcentaje de agilidad: " << porcentaje_agilidad << "%" << endl;
+    cout << "Protección activa: " << (proteccion ? "Sí" : "No") << endl;
+    cout << "Valor de protección: " << valor_proteccion << endl;
+}
 
 void Paladin::activar_proteccion_divina()
 {
@@ -182,7 +209,7 @@ void Paladin::reforzar_proteccion()
     cout << nombre << " ha reforzado su protección!" << endl;
 }
 
-// Caballero
+// ______________Caballero____________________
 Caballero::Caballero(string nombre) : Guerrero(nombre, TipoArma::LANZA),
                                       precision(0.8),
                                       velocidad_ataque(2),
@@ -224,6 +251,15 @@ void Caballero::entrenar()
     resistencia += 1;
     armadura += 1;
 }
+void Caballero::mostrar_info()
+{
+    Guerrero::mostrar_info_personaje();//muestro lo general
+    cout << "Precisión: " << precision << endl;
+    cout << "Velocidad de ataque: " << velocidad_ataque << endl;
+    cout << "Resistencia: " << resistencia << endl;
+    cout << "Combate cuerpo a cuerpo: " << (combate_cuerpo ? "Sí" : "No") << endl;
+    cout << "Armadura: " << armadura << endl;
+}
 
 void Caballero::activar_postura_defensiva()
 {
@@ -252,7 +288,7 @@ void Caballero::mejorar_armadura()
     cout << nombre << " ha mejorado su armadura, aumentando la defensa!" << endl;
 }
 
-// Mercenario
+// _____________Mercenario_______________________
 Mercenario::Mercenario(string nombre) : Guerrero(nombre, TipoArma::ESPADA),
                                         destreza_combate(5),
                                         rapidez_golpe(3),
@@ -305,6 +341,15 @@ void Mercenario::entrenar()
     rapidez_golpe += 1;
     sigilo += 1;
 }
+void Mercenario::mostrar_info()
+{
+    Guerrero::mostrar_info_personaje();//muestro lo general
+    cout << "Destreza en combate: " << destreza_combate << endl;
+    cout << "Rapidez de golpe: " << rapidez_golpe << endl;
+    cout << "Evasión de ataques: " << (evasion_ataques ? "Sí" : "No") << endl;
+    cout << "Sigilo: " << sigilo << endl;
+    cout << "Daño crítico: " << daño_critico << endl;
+}
 
 void Mercenario::activar_sigilo()
 {
@@ -331,7 +376,7 @@ void Mercenario::esquivar_ataques()
     cout << nombre << " ha activado su habilidad de evasión!" << endl;
 }
 
-// Gladiador
+// _________Gladiador____________
 Gladiador::Gladiador(string nombre) : Guerrero(nombre, TipoArma::GARROTE),
                                       fuerza_alta(7),
                                       resistencia(5),
@@ -375,6 +420,14 @@ void Gladiador::entrenar()
     fuerza_alta += 2;
     resistencia += 1;
     adrenalina += 1;
+}
+void Gladiador::mostrar_info()
+{
+    Guerrero::mostrar_info_personaje();//muestro lo general
+    cout << "Fuerza alta: " << fuerza_alta << endl;
+    cout << "Resistencia: " << resistencia << endl;
+    cout << "Supervivencia activa: " << (supervivencia ? "Sí" : "No") << endl;
+    cout << "Adrenalina activa: " << (adrenalina ? "Sí" : "No") << endl;
 }
 
 void Gladiador::activar_supervivencia()

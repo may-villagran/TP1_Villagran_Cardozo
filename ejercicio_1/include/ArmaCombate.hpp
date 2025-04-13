@@ -76,7 +76,7 @@ private:
     int resistencia_hojas;
 
     void afilar_lados();
-    void reforzar_filos(); // porcentaje del metal, mayor es el metal menor se refuerza el filo
+    void reforzar_filos(); 
     void mejorar_mango();
 
 public:

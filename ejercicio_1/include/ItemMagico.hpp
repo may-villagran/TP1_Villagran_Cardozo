@@ -54,9 +54,8 @@ private:
     float desgaste_magia;
     int dificultad_lectura;
 
-    void revelar_pagina();  // Desbloquea una nueva página (nivel)
-    void corromper_libro(); // Transforma el libro (a oscuro)
-
+    void revelar_pagina(); 
+    void corromper_libro(); 
 public:
     LibroHechizos(string nombre);
     // sobreescrita

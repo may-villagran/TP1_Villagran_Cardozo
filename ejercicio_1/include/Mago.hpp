@@ -21,16 +21,18 @@ protected:
     Mago(string nombre, TipoArma item_compatible, vector<unique_ptr<IArma>> arma); // constructor con arma
     Mago(string nombre, TipoArma item_compatible);
     virtual ~Mago() = default;
-    virtual void aprender_habilidades() = 0; // Método virtual puro
+    virtual void aprender_habilidades() = 0;      // Método virtual puro
+    void mostrar_info_personaje() override final; // mostrar info base
 public:
     string nombre;
     // Métodos que no dependen de la clase derivada
     void recibir_daño(int daño) override final;
-    int getHP()override final;
-    void set_armas(unique_ptr<IArma> arma)override final;
-    //dependen de la clases, las hago virtual de nuevo así las implementan las derivadas
-    virtual int atacar()=0;//ataque generico
-    virtual void defender(int daño)=0; //defensa general
+    int getHP() override final;
+    void set_armas(unique_ptr<IArma> arma) override final;
+    // dependen de la clases, las hago virtual de nuevo así las implementan las derivadas
+    virtual int atacar() = 0;            // ataque generico
+    virtual void defender(int daño) = 0; // defensa general
+    virtual void mostrar_info() = 0;
 };
 
 //_______________________________HECHICERO______________________________
@@ -39,8 +41,6 @@ class Hechicero : public Mago
 private:
     int nivel_inteligencia;
     bool poder_magico_alto;
-    int velocidad_conjuro;
-    bool uso_baston;
     int energia_magica;
 
     // Métodos privados
@@ -56,6 +56,7 @@ public:
     int atacar() override;
     void defender(int daño) override;
     void aprender_habilidades() override;
+    void mostrar_info() override;
 };
 
 //_____________________________CONJURADOR________________________________
@@ -66,7 +67,6 @@ private:
     bool invocacion_activa;
     int energia_invocacion;
     int resistencia_magica;
-    int velocidad_invocacion;
 
     // Métodos privados
     void invocar_criatura();
@@ -81,6 +81,7 @@ public:
     int atacar() override;
     void defender(int daño) override;
     void aprender_habilidades() override;
+    void mostrar_info() override;
 };
 
 //______________________BRUJO______________________________________________
@@ -89,8 +90,6 @@ class Brujo : public Mago
 private:
     bool poder_oscuro;
     int defensa_magica;
-    int debilitacion_enemigos;
-    bool capacidad_debilitar_enemigos;
     int energia_oscura;
 
     // Métodos privados
@@ -106,6 +105,7 @@ public:
     int atacar() override;
     void defender(int daño) override;
     void aprender_habilidades() override;
+    void mostrar_info() override;
 };
 
 //_______________NIGROMANTE__________________________________________
@@ -130,4 +130,5 @@ public:
     int atacar() override;
     void defender(int daño) override;
     void aprender_habilidades() override;
+    void mostrar_info() override;
 };

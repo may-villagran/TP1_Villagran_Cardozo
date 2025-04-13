@@ -5,7 +5,7 @@ using namespace std;
 
 // Mago clase abstracta
 Mago::Mago(string nombre, TipoArma item_compatible) : nivel_mago(0),
-                                                      hp(80),
+                                                      hp(100),
                                                       daño_magico(10),
                                                       compatible(item_compatible),
                                                       hay_item_compatible(false),
@@ -49,20 +49,25 @@ void Mago::set_armas(unique_ptr<IArma> arma)
     }
 }
 
-// Hechicero
+
+void Mago::mostrar_info_personaje()
+{
+    cout << "Nombre: " << nombre << endl;
+    cout << "HP: " << hp << endl;
+    cout << "Daño mágico: " << daño_magico << endl;
+    cout << "Nivel de mago: " << nivel_mago << endl;
+    cout << "Tiene item compatible: " << (hay_item_compatible ? "Sí" : "No") << endl;
+}
+// ________________Hechicero_________________________
 Hechicero::Hechicero(string nombre) : Mago(nombre, TipoArma::LIBRO_HECHIZOS),
                                       nivel_inteligencia(15),
                                       poder_magico_alto(true),
-                                      velocidad_conjuro(5),
-                                      uso_baston(false),
                                       energia_magica(50) {}
 
 Hechicero::Hechicero(string nombre, vector<unique_ptr<IArma>> armas)
     : Mago(nombre, TipoArma::LIBRO_HECHIZOS, move(armas)),
       nivel_inteligencia(15),
       poder_magico_alto(true),
-      velocidad_conjuro(5),
-      uso_baston(false),
       energia_magica(50) {}
 
 int Hechicero::atacar()
@@ -76,6 +81,13 @@ void Hechicero::defender(int daño)
     int daño_reducido = daño - (nivel_inteligencia * 0.3);
     this->hp -= (daño_reducido > 0) ? daño_reducido : 0;
 }
+void Hechicero::mostrar_info()
+{
+    Mago::mostrar_info();
+    cout << "Nivel de inteligencia: " << nivel_inteligencia << endl;
+    cout << "Poder mágico alto: " << (poder_magico_alto ? "Sí" : "No") << endl;
+    cout << "Energía mágica: " << energia_magica << endl;
+}
 
 void Hechicero::aumentar_inteligencia()
 {
@@ -88,8 +100,6 @@ void Hechicero::potenciar_conjuro()
     poder_magico_alto = true;
     cout << nombre << " ha potenciado su conjuro!" << endl;
 }
-
-
 
 void Hechicero::regenerar_energia()
 {
@@ -115,21 +125,19 @@ void Hechicero::aprender_habilidades()
     regenerar_energia();
 }
 
-// Conjurador
+// ___________Conjurador_______________
 Conjurador::Conjurador(string nombre) : Mago(nombre, TipoArma::BASTON),
                                         cantidad_hechizos(3),
                                         invocacion_activa(false),
                                         energia_invocacion(40),
-                                        resistencia_magica(10),
-                                        velocidad_invocacion(5) {}
+                                        resistencia_magica(10) {}
 
 Conjurador::Conjurador(string nombre, vector<unique_ptr<IArma>> armas)
     : Mago(nombre, TipoArma::BASTON, move(armas)),
       cantidad_hechizos(3),
       invocacion_activa(false),
       energia_invocacion(40),
-      resistencia_magica(10),
-      velocidad_invocacion(5) {}
+      resistencia_magica(10) {}
 
 int Conjurador::atacar()
 {
@@ -141,6 +149,14 @@ void Conjurador::defender(int daño)
 {
     int daño_reducido = daño - (resistencia_magica * 0.4);
     this->hp -= (daño_reducido > 0) ? daño_reducido : 0;
+}
+void Conjurador::mostrar_info()
+{
+    Mago::mostrar_info();
+    cout << "Cantidad de hechizos: " << cantidad_hechizos << endl;
+    cout << "Invocación activa: " << (invocacion_activa ? "Sí" : "No") << endl;
+    cout << "Energía de invocación: " << energia_invocacion << endl;
+    cout << "Resistencia mágica: " << resistencia_magica << endl;
 }
 
 void Conjurador::invocar_criatura()
@@ -162,8 +178,6 @@ void Conjurador::potenciar_invocacion()
     cantidad_hechizos++;
     cout << nombre << " ha potenciado su capacidad de invocación!" << endl;
 }
-
-
 
 void Conjurador::regenerar_energia_invocacion()
 {
@@ -189,20 +203,16 @@ void Conjurador::aprender_habilidades()
     regenerar_energia_invocacion();
 }
 
-// Brujo
+// __________Brujo______________
 Brujo::Brujo(string nombre) : Mago(nombre, TipoArma::AMULETO),
                               poder_oscuro(true),
                               defensa_magica(20),
-                              debilitacion_enemigos(10),
-                              capacidad_debilitar_enemigos(true),
                               energia_oscura(50) {}
 
 Brujo::Brujo(string nombre, vector<unique_ptr<IArma>> armas)
     : Mago(nombre, TipoArma::AMULETO, move(armas)),
       poder_oscuro(true),
       defensa_magica(20),
-      debilitacion_enemigos(10),
-      capacidad_debilitar_enemigos(true),
       energia_oscura(50) {}
 
 int Brujo::atacar()
@@ -217,7 +227,13 @@ void Brujo::defender(int daño)
     this->hp -= (daño_reducido > 0) ? daño_reducido : 0;
 }
 
-
+void Brujo::mostrar_info()
+{
+    Mago::mostrar_info();
+    cout << "Poder oscuro: " << (poder_oscuro ? "Sí" : "No") << endl;
+    cout << "Defensa mágica: " << defensa_magica << endl;
+    cout << "Energía oscura: " << energia_oscura << endl;
+}
 
 void Brujo::absorber_energia()
 {
@@ -236,8 +252,6 @@ void Brujo::aumentar_defensa_magica()
     defensa_magica += 5;
     cout << nombre << " ha aumentado su defensa mágica!" << endl;
 }
-
-
 
 // Implementación de aprender_habilidades para Brujo
 void Brujo::aprender_habilidades()
@@ -284,6 +298,15 @@ void Nigromante::defender(int daño)
     int daño_reducido = daño - (resistencia_sombras * 0.4);
     this->hp -= (daño_reducido > 0) ? daño_reducido : 0;
 }
+void Nigromante::mostrar_info()
+{
+    Mago::mostrar_info();//uso el del mago que me mustra la info generica
+    cout << "Dominio de los muertos: " << (dominio_muertos ? "Sí" : "No") << endl;
+    cout << "Cantidad de muertos: " << cantidad_muertos << endl;
+    cout << "Control absoluto: " << (control_absoluto ? "Sí" : "No") << endl;
+    cout << "Resistencia a las sombras: " << resistencia_sombras << endl;
+    cout << "Energía necromántica: " << energia_necromantica << endl;
+}
 
 void Nigromante::invocar_muertos()
 {
@@ -305,8 +328,6 @@ void Nigromante::potenciar_dominio()
     cout << nombre << " ha potenciado su dominio sobre los muertos!" << endl;
 }
 
-
-
 // Implementación de aprender_habilidades para Nigromante
 void Nigromante::aprender_habilidades()
 {
@@ -322,5 +343,4 @@ void Nigromante::aprender_habilidades()
     // Usar métodos propios del Nigromante
     invocar_muertos();
     potenciar_dominio();
-
 }
