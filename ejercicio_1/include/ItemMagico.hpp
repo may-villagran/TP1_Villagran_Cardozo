@@ -72,7 +72,7 @@ public:
 class Pocion : public ItemMagico
 {
 private:
-    TipoEfecto efecto_posion;
+    TipoEfecto efecto_pocion;
     int calidad;           // Calidad del brebaje (1 a 10, afecta su efectividad)
     float pureza_magica;   // Cuán estable y refinada es la esencia mágica
     int nivel_fabricacion; // Nivel del alquimista o método usado (afecta consistencia)

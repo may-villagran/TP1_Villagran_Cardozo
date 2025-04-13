@@ -96,7 +96,7 @@ void Baston::tallar_nueva_madera()
     else
     {
         madera = static_cast<TipoMadera>(static_cast<int>(madera) + 1);
-        cout << "La madera ha sido mejorada" << endl;
+        cout << "La madera ha sido mejorada a: " << tipo_madera_str(madera)<<endl;
     }
 }
 
@@ -167,7 +167,7 @@ void LibroHechizos::corromper_libro()
 //_________________POCION_________________
 
 Pocion::Pocion(string nombre) : ItemMagico(nombre, TipoArma::POCION),
-                                efecto_posion(TipoEfecto::CURACION),
+                                efecto_pocion(TipoEfecto::CURACION),
                                 calidad(8),
                                 pureza_magica(0.9),
                                 nivel_fabricacion(3),
@@ -187,8 +187,17 @@ void Pocion::desgaste()
 
 void Pocion::mejorar()
 {
-    mejorar_pureza();
     cout << "La poción " << nombre << " ha sido mejorada." << endl;
+    mejorar_pureza();
+    if (static_cast<int>(efecto_pocion) >= 10)
+    {
+        cout << "El efecto de la poción no puede ser mejorada." << endl;
+    }
+    else
+    {
+        efecto_pocion = static_cast<TipoEfecto>(static_cast<int>(efecto_pocion) + 1);
+        cout << "La poción ha cambiado de efecto a: " <<tipo_efecto_str(efecto_pocion)<< endl;
+    }
 }
 
 int Pocion::atacar()
@@ -204,7 +213,7 @@ int Pocion::atacar()
 void Pocion::mostrar_info()
 {
     ItemMagico::mostrar_info();
-    cout << "Efecto de la poción: " << tipo_efecto_str(efecto_posion) << "\n";
+    cout << "Efecto de la poción: " << tipo_efecto_str(efecto_pocion) << "\n";
     cout << "Calidad del brebaje: " << calidad << "/10\n";
     cout << "Pureza mágica: " << pureza_magica << "%\n";
     cout << "Nivel de fabricación: " << nivel_fabricacion << "\n";

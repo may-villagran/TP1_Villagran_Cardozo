@@ -96,7 +96,7 @@ void Lanza::reforzar_asta()
     else
     {
         asta = static_cast<TipoMadera>(static_cast<int>(asta) + 1);
-        cout << "La madera del asta ha sido mejorada." << endl;
+        cout << "La madera del asta ha sido mejorada a: "<<tipo_madera_str(asta) << endl;
     }
 }
 
@@ -109,7 +109,7 @@ void Lanza::reforzar_punta()
     else
     {
         punta = static_cast<TipoMetal>(static_cast<int>(punta) + 1);
-        cout << "La punta ha sido mejorada." << endl;
+        cout << "La punta ha sido mejorada a:" <<tipo_metal_str(punta)<< endl;
     }
 }
 
@@ -179,6 +179,7 @@ void HachaSimple::reforzar_union()
 }
 
 void HachaSimple::barnizar_mago()
+
 {
     cout << "El mango del hacha ha sido barnizado." << endl;
 }
@@ -251,6 +252,15 @@ void HachaDoble::reforzar_filos()
 
 void HachaDoble::mejorar_mango()
 {
+    if (static_cast<int>(mango) >= 5)
+    {
+        cout << "La madera del mangp no puede ser mejorada." << endl;
+    }
+    else
+    {
+        mango = static_cast<TipoMadera>(static_cast<int>(mango) + 1);
+        cout << "La madera del mango ha sido mejorada a: "<<tipo_madera_str(mango) << endl;
+    }
     cout << "El mango del hacha doble ha sido mejorado." << endl;
 }
 
@@ -317,7 +327,7 @@ void Garrote::reforzar_madera()
     else
     {
         madera_principal = static_cast<TipoMadera>(static_cast<int>(madera_principal) + 1);
-        cout << "La madera del garrote ha sido reforzada." << endl;
+        cout << "La madera del garrote ha sido reforzada a: "<<tipo_madera_str(madera_principal) << endl;
     }
 }
 
