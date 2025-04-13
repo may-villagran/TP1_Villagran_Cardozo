@@ -9,6 +9,7 @@ Guerrero::Guerrero(string nombre, TipoArma arma_compatible) : nivel_guerrero(0),
                                                               hp(100),
                                                               daño_ataque(5),
                                                               arma_compatible(arma_compatible),
+                                                              armas_poseidas(),
                                                               hay_arma_compatible(false),
                                                               nombre(nombre) {}
 

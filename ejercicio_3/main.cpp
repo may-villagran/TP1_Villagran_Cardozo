@@ -40,18 +40,36 @@ unique_ptr<IPersonaje> eleccion_personaje(int opcion)
 
 
 unique_ptr<IPersonaje> adversario_random() {
-    // Generar tipo de personaje
-    srand(time(nullptr));
-    int tipo_personaje = rand() % 9 + 1; // Rango [1-9]
-    unique_ptr<IPersonaje> adversario = PersonajeFactory::creacion_personaje("adversario", static_cast<TipoPersonaje>(tipo_personaje));
-    if (!adversario) return nullptr;
-    // Generar tipo de arma
-    int tipo_arma = rand() % 9 + 1; // Rango [1-9]
-    unique_ptr<IArma> arma_adversario = PersonajeFactory::creacion_arma("arma adversario", static_cast<TipoArma>(tipo_arma));
-    if (!arma_adversario) return nullptr;
-    
-    adversario->set_armas(move(arma_adversario));
-    return adversario;
+   cout<<endl;
+    try {
+        // Generar tipo de personaje (1-9)
+        int tipo_personaje = rand() % 9 + 1; // Rango válido [1-9]
+        std::cout << "Generando adversario de tipo: " << tipo_personaje << std::endl;
+
+        unique_ptr<IPersonaje> adversario = PersonajeFactory::creacion_personaje("adversario", static_cast<TipoPersonaje>(tipo_personaje));
+        if (!adversario) {
+            throw std::runtime_error("Error: No se pudo crear el adversario.");
+        }
+
+        // Generar tipo de arma (1-9)
+        int tipo_arma = rand() % 9 + 1; // Rango válido [1-9]
+        std::cout << "Generando arma para el adversario de tipo: " << tipo_arma << std::endl;
+
+        unique_ptr<IArma> arma_adversario = PersonajeFactory::creacion_arma("arma adversario", static_cast<TipoArma>(tipo_arma));
+        if (!arma_adversario) {
+            throw std::runtime_error("Error: No se pudo crear el arma del adversario.");
+        }
+
+        // Asignar el arma al adversario
+        std::cout << "Asignando arma al adversario..." << std::endl;
+        adversario->set_armas(std::move(arma_adversario));
+
+        return adversario; // Retornar el adversario creado exitosamente
+    } catch (const std::exception& e) {
+        // Manejo de errores y depuración
+        std::cerr << "Error en adversario_random: " << e.what() << std::endl;
+        return nullptr; // Si algo falla, retornar nullptr
+    }
 }
 
 Ataque obtener_ataque_jugador(){
@@ -90,7 +108,7 @@ int main()
     } while(!personaje_1);
     personaje_1->mostrar_info();
 
-    /* do{
+     do{
         personaje_2 = adversario_random();
     }while(!personaje_2);
 
@@ -118,7 +136,7 @@ int main()
             cout << "Empate de ataques. Nadie recibe daño.\n";
         }
     
-    } while (personaje_1->getHP() > 0 && personaje_2->getHP() > 0); */
+    } while (personaje_1->getHP() > 0 && personaje_2->getHP() > 0); 
     
 
 

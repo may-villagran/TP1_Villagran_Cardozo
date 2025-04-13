@@ -7,6 +7,7 @@ Mago::Mago(string nombre, TipoArma item_compatible) : nivel_mago(0),
                                                       hp(100),
                                                       daño_magico(10),
                                                       compatible(item_compatible),
+                                                      armas_poseidas(),
                                                       hay_item_compatible(false),
                                                       nombre(nombre)
 {
