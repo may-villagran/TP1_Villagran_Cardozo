@@ -11,8 +11,7 @@
 
 using namespace std;
 //declaraciones adelantadas
-class IPersonaje; 
-class IArma;
+
 
 class PersonajeFactory{
     public:
