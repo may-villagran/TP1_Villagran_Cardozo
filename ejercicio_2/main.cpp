@@ -52,7 +52,14 @@ int main()
         }
     }
 
+
     cout << "Se han creado todos los personajes." << endl;
+
+
+    for(unique_ptr<IPersonaje>&p : personajes){
+        p->mostrar_info();
+        cout<<endl;
+    }
 
     return 0;
 }

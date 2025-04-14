@@ -57,6 +57,18 @@ void Guerrero::mostrar_info()
     cout << "Daño de ataque: " << daño_ataque << endl;
     cout << "Nivel de guerreo: " << nivel_guerrero << endl;
     cout << "Tiene item compatible: " << (hay_arma_compatible ? "Sí" : "No") << endl;
+
+    if(armas_poseidas.size()==0){
+        cout<<"El guerrero no tiene armas."<<endl;
+    }
+    else{
+        cout<<"El guerrero tiene: "<<armas_poseidas.size()<<" armas"<<endl;
+        cout<<"Información de las armas:"<<endl;
+        for(unique_ptr<IArma>&a : armas_poseidas){
+            a->mostrar_info();
+            cout<<endl;
+        }
+    }
 }
 
 // _________Barbaro____________

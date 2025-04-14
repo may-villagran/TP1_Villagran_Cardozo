@@ -145,4 +145,10 @@ int main()
 
     } while (personaje_1->getHP() > 0 && personaje_2->getHP() > 0);
 
+    if (personaje_1->getHP() > 0) {
+        cout << "\n¡Has ganado la batalla!\n";
+    } else {
+        cout << "\nEl enemigo ha ganado la batalla. Mejor suerte la próxima vez.\n";
+    }
+    
 }

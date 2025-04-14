@@ -52,11 +52,24 @@ void Mago::set_armas(unique_ptr<IArma> arma)
 
 void Mago::mostrar_info()
 {
+    cout << "__Información básica del personaje:___"<<endl;
     cout << "Nombre: " << nombre << endl;
     cout << "HP: " << hp << endl;
     cout << "Daño mágico: " << daño_magico << endl;
     cout << "Nivel de mago: " << nivel_mago << endl;
     cout << "Tiene item compatible: " << (hay_item_compatible ? "Sí" : "No") << endl;
+
+    if(armas_poseidas.size()==0){
+        cout<<"El mago no tiene armas."<<endl;
+    }
+    else{
+        cout<<"El mago tiene: "<<armas_poseidas.size()<<" armas"<<endl;
+        cout<<"Información de las armas:"<<endl;
+        for(unique_ptr<IArma>&a : armas_poseidas){
+            a->mostrar_info();
+            cout<<endl;
+        }
+    }
 }
 // ________________Hechicero_________________________
 Hechicero::Hechicero(string nombre) : Mago(nombre, TipoArma::LIBRO_HECHIZOS),
