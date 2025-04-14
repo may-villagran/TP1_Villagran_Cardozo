@@ -104,6 +104,7 @@ int main()
         cin >> opcion;
         personaje_1 = eleccion_personaje(opcion);
     } while (!personaje_1);
+    cout<<"Tu personaje"<<endl;
     personaje_1->mostrar_info();
     
 
