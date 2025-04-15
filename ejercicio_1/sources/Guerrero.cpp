@@ -90,9 +90,18 @@ int Barbaro::atacar()
 {
     if (furia)
         activar_furia();
-    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.05 : 0);
+    
+    int daño_armas=0;
+    for(unique_ptr<IArma>&a : armas_poseidas){
+        daño_armas = a->atacar();
+        a->mejorar();
+    }
+
+    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.05 : 0) + daño_armas * 0.01;
     int daño_total = daño_base + fuerza_bruta + velocidad_ataque + (furia ? daño_extra * 1.5 : daño_extra);
+    cout<<"El daño total es:"<<daño_total;
     return daño_total;
+
 }
 
 void Barbaro::defender(int daño)
@@ -165,8 +174,14 @@ Paladin::Paladin(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(nomb
 int Paladin::atacar()
 {
     reforzar_proteccion();
-    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0);
+    int daño_armas=0;
+    for(unique_ptr<IArma>&a : armas_poseidas){
+        daño_armas = a->atacar();
+        a->mejorar();
+    }
+    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1;
     int daño_total = daño_base + fuerza + (porcentaje_agilidad * 10);
+    cout<<"El daño total es:"<<daño_total;
     return daño_total;
 }
 
@@ -239,8 +254,14 @@ Caballero::Caballero(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(
 int Caballero::atacar()
 {
     mejorar_precision();
-    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0);
+        int daño_armas=0;
+    for(unique_ptr<IArma>&a : armas_poseidas){
+        daño_armas = a->atacar();
+        a->mejorar();
+    }
+    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1;
     int daño_total = daño_base + (precision * 10) + velocidad_ataque;
+    cout<<"El daño total es:"<<daño_total;
     return daño_total;
 }
 
@@ -319,13 +340,19 @@ int Mercenario::atacar()
 {
     mejorar_destreza();
     mejorar_golpe_critico();
-    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0);
+        int daño_armas=0;
+    for(unique_ptr<IArma>&a : armas_poseidas){
+        daño_armas = a->atacar();
+        a->mejorar();
+    }
+    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1;
     int daño_total = daño_base + destreza_combate + (rapidez_golpe * 2);
     if (rand() % 100 < 20) // 20% de probabilidad de golpe crítico
     {
         daño_total += daño_critico;
         cout << nombre << " realizó un golpe crítico!" << endl;
     }
+    cout<<"El daño total es:"<<daño_total;
     return daño_total;
 }
 
@@ -404,8 +431,14 @@ Gladiador::Gladiador(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(
 int Gladiador::atacar()
 {
     activar_adrenalina();
-    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0);
+        int daño_armas=0;
+    for(unique_ptr<IArma>&a : armas_poseidas){
+        daño_armas = a->atacar();
+        a->mejorar();
+    }
+    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1;
     int daño_total = daño_base + fuerza_alta + (adrenalina * 2);
+    cout<<"El daño total es:"<<daño_total;
     return daño_total;
 }
 

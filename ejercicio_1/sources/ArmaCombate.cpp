@@ -395,7 +395,6 @@ int Espada::atacar()
     }
 
     desgaste();
-    cout << "La espada " << nombre << " ha atacado causando " << daño << " de daño." << endl;
     return daño;
 }
 void Espada::mostrar_info()

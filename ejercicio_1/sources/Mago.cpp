@@ -85,7 +85,13 @@ Hechicero::Hechicero(string nombre, vector<unique_ptr<IArma>> armas)
 
 int Hechicero::atacar()
 {
-    int daño_base = daño_magico + (poder_magico_alto ? daño_magico * 0.2 : 0);
+    int daño_armas=0;
+    for(unique_ptr<IArma>&a : armas_poseidas){
+        daño_armas = a->atacar();
+        a->mejorar();
+    }
+    int daño_base = daño_magico + (poder_magico_alto ? daño_magico * 0.2 : 0)+daño_armas*0.2;
+    cout<<"El daño total es de: "<<daño_base + nivel_inteligencia<<endl;
     return daño_base + nivel_inteligencia;
 }
 
@@ -154,8 +160,15 @@ Conjurador::Conjurador(string nombre, vector<unique_ptr<IArma>> armas)
 
 int Conjurador::atacar()
 {
-    int daño_base = daño_magico + (invocacion_activa ? daño_magico * 0.3 : 0);
-    return daño_base + cantidad_hechizos * 5;
+    int daño_armas=0;
+    for(unique_ptr<IArma>&a : armas_poseidas){
+        daño_armas = a->atacar();
+        a->mejorar();
+    }
+    int daño_base = daño_magico + (invocacion_activa ? daño_magico * 0.3 : 0) + daño_armas*0.1 +cantidad_hechizos * 0.5;
+    
+    cout<<"El daño total es de: "<<daño_base<<endl;
+    return daño_base;
 }
 
 void Conjurador::defender(int daño)
@@ -230,8 +243,14 @@ Brujo::Brujo(string nombre, vector<unique_ptr<IArma>> armas)
 
 int Brujo::atacar()
 {
-    int daño_base = daño_magico + (poder_oscuro ? daño_magico * 0.25 : 0);
-    return daño_base + energia_oscura * 0.5;
+    int daño_armas=0;
+    for(unique_ptr<IArma>&a : armas_poseidas){
+        daño_armas = a->atacar();
+        a->mejorar();
+    }
+    int daño_base = daño_magico + (poder_oscuro ? daño_magico * 0.25 : 0)+daño_armas*0.001+ energia_oscura * 0.5;
+    cout<<"El daño total es: "<<daño_base;
+    return daño_base ;
 }
 
 void Brujo::defender(int daño)
@@ -302,8 +321,14 @@ Nigromante::Nigromante(string nombre, vector<unique_ptr<IArma>> armas)
 
 int Nigromante::atacar()
 {
-    int daño_base = daño_magico + (dominio_muertos ? daño_magico * 0.3 : 0);
-    return daño_base + cantidad_muertos * 10;
+    int daño_armas=0;
+    for(unique_ptr<IArma>&a : armas_poseidas){
+        daño_armas = a->atacar();
+        a->mejorar();
+    }
+    int daño_base = daño_magico + (dominio_muertos ? daño_magico * 0.3 : 0)+daño_armas*0.01+cantidad_muertos * 0.2;
+    cout<<"El daño total es: "<<daño_base;
+    return daño_base ;
 }
 
 void Nigromante::defender(int daño)
