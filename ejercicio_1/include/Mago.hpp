@@ -18,8 +18,8 @@ protected:
     vector<unique_ptr<IArma>> armas_poseidas;
     bool hay_item_compatible;
 
-    Mago(string nombre, TipoArma item_compatible, vector<unique_ptr<IArma>> arma); // constructor con arma
-    Mago(string nombre, TipoArma item_compatible);
+    Mago(string nombre_mago, TipoArma item_compatible, vector<unique_ptr<IArma>> arma); // constructor con arma
+    Mago(string nombre_mago, TipoArma item_compatible);
     virtual ~Mago() = default;
     virtual void aprender_habilidades() = 0;      // Método virtual puro
 public:
@@ -48,8 +48,8 @@ private:
     void regenerar_energia();
 
 public:
-    Hechicero(string nombre);
-    Hechicero(string nombre, vector<unique_ptr<IArma>> armas);
+    Hechicero(string nombre_mago);
+    Hechicero(string nombre_mago, vector<unique_ptr<IArma>> armas);
 
     // Métodos sobrescritos
     int atacar() override;
@@ -73,8 +73,8 @@ private:
     void regenerar_energia_invocacion();
 
 public:
-    Conjurador(string nombre);
-    Conjurador(string nombre, vector<unique_ptr<IArma>> armas);
+    Conjurador(string nombre_mago);
+    Conjurador(string nombre_mago, vector<unique_ptr<IArma>> armas);
 
     // Métodos sobrescritos
     int atacar() override;
@@ -97,8 +97,8 @@ private:
     void aumentar_defensa_magica();
 
 public:
-    Brujo(string nombre);
-    Brujo(string nombre, vector<unique_ptr<IArma>> armas);
+    Brujo(string nombre_mago);
+    Brujo(string nombre_mago, vector<unique_ptr<IArma>> armas);
 
     // Métodos sobrescritos
     int atacar() override;
@@ -122,8 +122,8 @@ private:
     void potenciar_dominio();
 
 public:
-    Nigromante(string nombre);
-    Nigromante(string nombre, vector<unique_ptr<IArma>> armas);
+    Nigromante(string nombre_mago);
+    Nigromante(string nombre_mago, vector<unique_ptr<IArma>> armas);
 
     // Métodos sobrescritos
     int atacar() override;

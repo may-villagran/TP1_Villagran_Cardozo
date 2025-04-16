@@ -5,7 +5,7 @@ using namespace std;
 class Arma;
 
 // Guerrero clase abstracta
-Guerrero::Guerrero(string nombre, TipoArma arma_compatible) : nivel_guerrero(0),
+Guerrero::Guerrero(string nombre_guerrero, TipoArma arma_compatible) : nivel_guerrero(0),
                                                               hp(100),
                                                               daño_ataque(5),
                                                               arma_compatible(arma_compatible),
@@ -13,7 +13,7 @@ Guerrero::Guerrero(string nombre, TipoArma arma_compatible) : nivel_guerrero(0),
                                                               hay_arma_compatible(false),
                                                               nombre(nombre) {}
 
-Guerrero::Guerrero(string nombre, TipoArma arma_compatible, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, arma_compatible)
+Guerrero::Guerrero(string nombre_guerrero, TipoArma arma_compatible, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, arma_compatible)
 {
     for (unique_ptr<IArma> &arma : armas)
     {
@@ -72,14 +72,14 @@ void Guerrero::mostrar_info()
 }
 
 // _________Barbaro____________
-Barbaro::Barbaro(string nombre) : Guerrero(nombre, TipoArma::HACHA_DOBLE),
+Barbaro::Barbaro(string nombre_guerrero) : Guerrero(nombre, TipoArma::HACHA_DOBLE),
                                   fuerza_bruta(5),
                                   resistencia_física(3),
                                   velocidad_ataque(2),
                                   furia(false),
                                   daño_extra(0) {}
 
-Barbaro::Barbaro(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::HACHA_DOBLE, move(armas)),
+Barbaro::Barbaro(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::HACHA_DOBLE, move(armas)),
                                                                    fuerza_bruta(5),
                                                                    resistencia_física(3),
                                                                    velocidad_ataque(2),
@@ -97,8 +97,8 @@ int Barbaro::atacar()
         a->mejorar();
     }
 
-    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.05 : 0) + daño_armas * 0.01;
-    int daño_total = daño_base + fuerza_bruta + velocidad_ataque + (furia ? daño_extra * 1.5 : daño_extra);
+    int daño_base = static_cast<int>( daño_ataque + (hay_arma_compatible ? daño_ataque * 0.05 : 0) + daño_armas * 0.01);
+    int daño_total =static_cast<int>( daño_base + fuerza_bruta + velocidad_ataque + (furia ? daño_extra * 1.5 : daño_extra));
     cout<<"El daño total es:"<<daño_total;
     return daño_total;
 
@@ -157,14 +157,14 @@ void Barbaro::regenerar_vida()
 }
 
 // __________Paladin__________________
-Paladin::Paladin(string nombre) : Guerrero(nombre, TipoArma::HACHA_SIMPLE),
+Paladin::Paladin(string nombre_guerrero) : Guerrero(nombre, TipoArma::HACHA_SIMPLE),
                                   porcentaje_autocuracion(0.05),
                                   fuerza(5),
                                   porcentaje_agilidad(0.1),
                                   proteccion(false),
                                   valor_proteccion(0.2) {}
 
-Paladin::Paladin(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::HACHA_SIMPLE, move(armas)),
+Paladin::Paladin(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::HACHA_SIMPLE, move(armas)),
                                                                    porcentaje_autocuracion(0.05),
                                                                    fuerza(5),
                                                                    porcentaje_agilidad(0.1),
@@ -179,8 +179,8 @@ int Paladin::atacar()
         daño_armas = a->atacar();
         a->mejorar();
     }
-    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1;
-    int daño_total = daño_base + fuerza + (porcentaje_agilidad * 10);
+    int daño_base = static_cast<int>(daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1);
+    int daño_total = static_cast<int>(daño_base + fuerza + (porcentaje_agilidad * 10));
     cout<<"El daño total es:"<<daño_total;
     return daño_total;
 }
@@ -237,14 +237,14 @@ void Paladin::reforzar_proteccion()
 }
 
 // ______________Caballero____________________
-Caballero::Caballero(string nombre) : Guerrero(nombre, TipoArma::LANZA),
+Caballero::Caballero(string nombre_guerrero) : Guerrero(nombre, TipoArma::LANZA),
                                       precision(0.8),
                                       velocidad_ataque(2),
                                       resistencia(5),
                                       combate_cuerpo(false),
                                       armadura(3) {}
 
-Caballero::Caballero(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::LANZA, move(armas)),
+Caballero::Caballero(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::LANZA, move(armas)),
                                                                        precision(0.8),
                                                                        velocidad_ataque(2),
                                                                        resistencia(5),
@@ -259,8 +259,8 @@ int Caballero::atacar()
         daño_armas = a->atacar();
         a->mejorar();
     }
-    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1;
-    int daño_total = daño_base + (precision * 10) + velocidad_ataque;
+    int daño_base = static_cast<int>(daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1);
+    int daño_total = static_cast<int>(daño_base + (precision * 10) + velocidad_ataque);
     cout<<"El daño total es:"<<daño_total;
     return daño_total;
 }
@@ -322,14 +322,14 @@ void Caballero::mejorar_armadura()
 }
 
 // _____________Mercenario_______________________
-Mercenario::Mercenario(string nombre) : Guerrero(nombre, TipoArma::ESPADA),
+Mercenario::Mercenario(string nombre_guerrero) : Guerrero(nombre, TipoArma::ESPADA),
                                         destreza_combate(5),
                                         rapidez_golpe(3),
                                         evasion_ataques(false),
                                         sigilo(2),
                                         daño_critico(10) {}
 
-Mercenario::Mercenario(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::ESPADA, move(armas)),
+Mercenario::Mercenario(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::ESPADA, move(armas)),
                                                                          destreza_combate(5),
                                                                          rapidez_golpe(3),
                                                                          evasion_ataques(false),
@@ -345,8 +345,8 @@ int Mercenario::atacar()
         daño_armas = a->atacar();
         a->mejorar();
     }
-    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1;
-    int daño_total = daño_base + destreza_combate + (rapidez_golpe * 2);
+    int daño_base = static_cast<int>(daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1);
+    int daño_total = static_cast<int>(daño_base + destreza_combate + (rapidez_golpe * 2));
     if (rand() % 100 < 20) // 20% de probabilidad de golpe crítico
     {
         daño_total += daño_critico;
@@ -416,13 +416,13 @@ void Mercenario::esquivar_ataques()
 }
 
 // _________Gladiador____________
-Gladiador::Gladiador(string nombre) : Guerrero(nombre, TipoArma::GARROTE),
+Gladiador::Gladiador(string nombre_guerrero) : Guerrero(nombre, TipoArma::GARROTE),
                                       fuerza_alta(7),
                                       resistencia(5),
                                       supervivencia(false),
                                       adrenalina(3) {}
 
-Gladiador::Gladiador(string nombre, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::GARROTE, move(armas)),
+Gladiador::Gladiador(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::GARROTE, move(armas)),
                                                                        fuerza_alta(7),
                                                                        resistencia(5),
                                                                        supervivencia(false),
@@ -436,7 +436,8 @@ int Gladiador::atacar()
         daño_armas = a->atacar();
         a->mejorar();
     }
-    int daño_base = daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1;
+    
+    int daño_base = static_cast<int>(daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1);
     int daño_total = daño_base + fuerza_alta + (adrenalina * 2);
     cout<<"El daño total es:"<<daño_total;
     return daño_total;

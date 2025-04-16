@@ -17,8 +17,8 @@ protected:
     bool hay_arma_compatible;
     
     // pongo los contructores protected así no los, puedo llamar pero son privados para las derivdas
-    Guerrero(string nombre, TipoArma arma_compatible);
-    Guerrero(string nombre, TipoArma arma_compatible, vector<unique_ptr<IArma>> armas); // constructor con arma
+    Guerrero(string nombre_guerrero, TipoArma arma_compatible);
+    Guerrero(string nombre_guerrero, TipoArma arma_compatible, vector<unique_ptr<IArma>> armas); // constructor con arma
     
     virtual ~Guerrero() = default;
     //funciones que obligo a las derivadas a implementar
@@ -51,8 +51,8 @@ private:
     void regenerar_vida(); // Recupera puntos de vida al entrar en un estado de calma
 
 public:
-    Barbaro(string nombre);
-    Barbaro(string nombre, vector<unique_ptr<IArma>> armas);
+    Barbaro(string nombre_guerrero);
+    Barbaro(string nombre_guerrero, vector<unique_ptr<IArma>> armas);
     int atacar() override;
     void defender(int daño) override;
     void entrenar() override;
@@ -74,8 +74,8 @@ private:
     void reforzar_proteccion();       // Mejora la efectividad de su protección
 
 public:
-    Paladin(string nombre);
-    Paladin(string nombre, vector<unique_ptr<IArma>> armas);
+    Paladin(string nombre_guerrero);
+    Paladin(string nombre_guerrero, vector<unique_ptr<IArma>> armas);
 
     int atacar() override;
     void defender(int daño) override;
@@ -102,8 +102,8 @@ protected:
     void mejorar_armadura();
 
 public:
-    Caballero(string nombre);
-    Caballero(string nombre, vector<unique_ptr<IArma>> armas);
+    Caballero(string nombre_guerrero);
+    Caballero(string nombre_guerrero, vector<unique_ptr<IArma>> armas);
 
     int atacar() override;
     void defender(int daño) override;
@@ -132,8 +132,8 @@ private:
     void esquivar_ataques();
 
 public:
-    Mercenario(string nombre);
-    Mercenario(string nombre, vector<unique_ptr<IArma>> armas);
+    Mercenario(string nombre_guerrero);
+    Mercenario(string nombre_guerrero, vector<unique_ptr<IArma>> armas);
 
     int atacar() override;
     void defender(int daño) override;
@@ -158,8 +158,8 @@ private:
     void activar_supervivencia();
 
 public:
-    Gladiador(string nombre);
-    Gladiador(string nombre, vector<unique_ptr<IArma>> armas);
+    Gladiador(string nombre_guerrero);
+    Gladiador(string nombre_guerrero, vector<unique_ptr<IArma>> armas);
 
     int atacar() override;
     void defender(int daño) override;

@@ -3,7 +3,7 @@
 using namespace std;
 
 // Mago clase abstracta
-Mago::Mago(string nombre, TipoArma item_compatible) : nivel_mago(0),
+Mago::Mago(string nombre_mago, TipoArma item_compatible) : nivel_mago(0),
                                                       hp(100),
                                                       daño_magico(10),
                                                       compatible(item_compatible),
@@ -13,7 +13,7 @@ Mago::Mago(string nombre, TipoArma item_compatible) : nivel_mago(0),
 {
 }
 
-Mago::Mago(string nombre, TipoArma item_compatible, vector<unique_ptr<IArma>> armas) : Mago(nombre, item_compatible)
+Mago::Mago(string nombre_mago, TipoArma item_compatible, vector<unique_ptr<IArma>> armas) : Mago(nombre, item_compatible)
 {
     for (unique_ptr<IArma> &a : armas)
     {
@@ -72,12 +72,12 @@ void Mago::mostrar_info()
     }
 }
 // ________________Hechicero_________________________
-Hechicero::Hechicero(string nombre) : Mago(nombre, TipoArma::LIBRO_HECHIZOS),
+Hechicero::Hechicero(string nombre_mago) : Mago(nombre, TipoArma::LIBRO_HECHIZOS),
                                       nivel_inteligencia(15),
                                       poder_magico_alto(true),
                                       energia_magica(50) {}
 
-Hechicero::Hechicero(string nombre, vector<unique_ptr<IArma>> armas)
+Hechicero::Hechicero(string nombre_mago, vector<unique_ptr<IArma>> armas)
     : Mago(nombre, TipoArma::LIBRO_HECHIZOS, move(armas)),
       nivel_inteligencia(15),
       poder_magico_alto(true),
@@ -90,7 +90,7 @@ int Hechicero::atacar()
         daño_armas = a->atacar();
         a->mejorar();
     }
-    int daño_base = daño_magico + (poder_magico_alto ? daño_magico * 0.2 : 0)+daño_armas*0.2;
+    int daño_base = static_cast<int>(daño_magico + (poder_magico_alto ? daño_magico * 0.2 : 0)+daño_armas*0.2);
     cout<<"El daño total es de: "<<daño_base + nivel_inteligencia<<endl;
     return daño_base + nivel_inteligencia;
 }
@@ -145,13 +145,13 @@ void Hechicero::aprender_habilidades()
 }
 
 // ___________Conjurador_______________
-Conjurador::Conjurador(string nombre) : Mago(nombre, TipoArma::BASTON),
+Conjurador::Conjurador(string nombre_mago) : Mago(nombre, TipoArma::BASTON),
                                         cantidad_hechizos(3),
                                         invocacion_activa(false),
                                         energia_invocacion(40),
                                         resistencia_magica(10) {}
 
-Conjurador::Conjurador(string nombre, vector<unique_ptr<IArma>> armas)
+Conjurador::Conjurador(string nombre_mago, vector<unique_ptr<IArma>> armas)
     : Mago(nombre, TipoArma::BASTON, move(armas)),
       cantidad_hechizos(3),
       invocacion_activa(false),
@@ -165,7 +165,7 @@ int Conjurador::atacar()
         daño_armas = a->atacar();
         a->mejorar();
     }
-    int daño_base = daño_magico + (invocacion_activa ? daño_magico * 0.3 : 0) + daño_armas*0.1 +cantidad_hechizos * 0.5;
+    int daño_base =static_cast<int>( daño_magico + (invocacion_activa ? daño_magico * 0.3 : 0) + daño_armas*0.1 +cantidad_hechizos * 0.5);
     
     cout<<"El daño total es de: "<<daño_base<<endl;
     return daño_base;
@@ -230,12 +230,12 @@ void Conjurador::aprender_habilidades()
 }
 
 // __________Brujo______________
-Brujo::Brujo(string nombre) : Mago(nombre, TipoArma::AMULETO),
+Brujo::Brujo(string nombre_mago) : Mago(nombre, TipoArma::AMULETO),
                               poder_oscuro(true),
                               defensa_magica(20),
                               energia_oscura(50) {}
 
-Brujo::Brujo(string nombre, vector<unique_ptr<IArma>> armas)
+Brujo::Brujo(string nombre_mago, vector<unique_ptr<IArma>> armas)
     : Mago(nombre, TipoArma::AMULETO, move(armas)),
       poder_oscuro(true),
       defensa_magica(20),
@@ -248,7 +248,7 @@ int Brujo::atacar()
         daño_armas = a->atacar();
         a->mejorar();
     }
-    int daño_base = daño_magico + (poder_oscuro ? daño_magico * 0.25 : 0)+daño_armas*0.001+ energia_oscura * 0.5;
+    int daño_base = static_cast<int>(daño_magico + (poder_oscuro ? daño_magico * 0.25 : 0)+daño_armas*0.001+ energia_oscura * 0.5);
     cout<<"El daño total es: "<<daño_base;
     return daño_base ;
 }
@@ -304,14 +304,14 @@ void Brujo::aprender_habilidades()
 }
 
 // Nigromante
-Nigromante::Nigromante(string nombre) : Mago(nombre, TipoArma::POCION),
+Nigromante::Nigromante(string nombre_mago) : Mago(nombre, TipoArma::POCION),
                                         dominio_muertos(true),
                                         cantidad_muertos(5),
                                         control_absoluto(false),
                                         resistencia_sombras(15),
                                         energia_necromantica(40) {}
 
-Nigromante::Nigromante(string nombre, vector<unique_ptr<IArma>> armas)
+Nigromante::Nigromante(string nombre_mago, vector<unique_ptr<IArma>> armas)
     : Mago(nombre, TipoArma::POCION, move(armas)),
       dominio_muertos(true),
       cantidad_muertos(5),
@@ -326,7 +326,7 @@ int Nigromante::atacar()
         daño_armas = a->atacar();
         a->mejorar();
     }
-    int daño_base = daño_magico + (dominio_muertos ? daño_magico * 0.3 : 0)+daño_armas*0.01+cantidad_muertos * 0.2;
+    int daño_base = static_cast<int>(daño_magico + (dominio_muertos ? daño_magico * 0.3 : 0)+daño_armas*0.01+cantidad_muertos * 0.2);
     cout<<"El daño total es: "<<daño_base;
     return daño_base ;
 }
