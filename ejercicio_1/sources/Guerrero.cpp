@@ -11,9 +11,9 @@ Guerrero::Guerrero(string nombre_guerrero, TipoArma arma_compatible) : nivel_gue
                                                               arma_compatible(arma_compatible),
                                                               armas_poseidas(),
                                                               hay_arma_compatible(false),
-                                                              nombre(nombre) {}
+                                                              nombre(nombre_guerrero) {}
 
-Guerrero::Guerrero(string nombre_guerrero, TipoArma arma_compatible, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, arma_compatible)
+Guerrero::Guerrero(string nombre_guerrero, TipoArma arma_compatible, vector<unique_ptr<IArma>> armas) : Guerrero(nombre_guerrero, arma_compatible)
 {
     for (unique_ptr<IArma> &arma : armas)
     {
@@ -72,14 +72,14 @@ void Guerrero::mostrar_info()
 }
 
 // _________Barbaro____________
-Barbaro::Barbaro(string nombre_guerrero) : Guerrero(nombre, TipoArma::HACHA_DOBLE),
+Barbaro::Barbaro(string nombre_guerrero) : Guerrero(nombre_guerrero, TipoArma::HACHA_DOBLE),
                                   fuerza_bruta(5),
                                   resistencia_física(3),
                                   velocidad_ataque(2),
                                   furia(false),
                                   daño_extra(0) {}
 
-Barbaro::Barbaro(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::HACHA_DOBLE, move(armas)),
+Barbaro::Barbaro(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre_guerrero, TipoArma::HACHA_DOBLE, move(armas)),
                                                                    fuerza_bruta(5),
                                                                    resistencia_física(3),
                                                                    velocidad_ataque(2),
@@ -157,14 +157,14 @@ void Barbaro::regenerar_vida()
 }
 
 // __________Paladin__________________
-Paladin::Paladin(string nombre_guerrero) : Guerrero(nombre, TipoArma::HACHA_SIMPLE),
+Paladin::Paladin(string nombre_guerrero) : Guerrero(nombre_guerrero, TipoArma::HACHA_SIMPLE),
                                   porcentaje_autocuracion(0.05),
                                   fuerza(5),
                                   porcentaje_agilidad(0.1),
                                   proteccion(false),
                                   valor_proteccion(0.2) {}
 
-Paladin::Paladin(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::HACHA_SIMPLE, move(armas)),
+Paladin::Paladin(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre_guerrero, TipoArma::HACHA_SIMPLE, move(armas)),
                                                                    porcentaje_autocuracion(0.05),
                                                                    fuerza(5),
                                                                    porcentaje_agilidad(0.1),
@@ -237,14 +237,14 @@ void Paladin::reforzar_proteccion()
 }
 
 // ______________Caballero____________________
-Caballero::Caballero(string nombre_guerrero) : Guerrero(nombre, TipoArma::LANZA),
+Caballero::Caballero(string nombre_guerrero) : Guerrero(nombre_guerrero, TipoArma::LANZA),
                                       precision(0.8),
                                       velocidad_ataque(2),
                                       resistencia(5),
                                       combate_cuerpo(false),
                                       armadura(3) {}
 
-Caballero::Caballero(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::LANZA, move(armas)),
+Caballero::Caballero(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre_guerrero, TipoArma::LANZA, move(armas)),
                                                                        precision(0.8),
                                                                        velocidad_ataque(2),
                                                                        resistencia(5),
@@ -322,14 +322,14 @@ void Caballero::mejorar_armadura()
 }
 
 // _____________Mercenario_______________________
-Mercenario::Mercenario(string nombre_guerrero) : Guerrero(nombre, TipoArma::ESPADA),
+Mercenario::Mercenario(string nombre_guerrero) : Guerrero(nombre_guerrero, TipoArma::ESPADA),
                                         destreza_combate(5),
                                         rapidez_golpe(3),
                                         evasion_ataques(false),
                                         sigilo(2),
                                         daño_critico(10) {}
 
-Mercenario::Mercenario(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::ESPADA, move(armas)),
+Mercenario::Mercenario(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre_guerrero, TipoArma::ESPADA, move(armas)),
                                                                          destreza_combate(5),
                                                                          rapidez_golpe(3),
                                                                          evasion_ataques(false),
@@ -416,13 +416,13 @@ void Mercenario::esquivar_ataques()
 }
 
 // _________Gladiador____________
-Gladiador::Gladiador(string nombre_guerrero) : Guerrero(nombre, TipoArma::GARROTE),
+Gladiador::Gladiador(string nombre_guerrero) : Guerrero(nombre_guerrero, TipoArma::GARROTE),
                                       fuerza_alta(7),
                                       resistencia(5),
                                       supervivencia(false),
                                       adrenalina(3) {}
 
-Gladiador::Gladiador(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre, TipoArma::GARROTE, move(armas)),
+Gladiador::Gladiador(string nombre_guerrero, vector<unique_ptr<IArma>> armas) : Guerrero(nombre_guerrero, TipoArma::GARROTE, move(armas)),
                                                                        fuerza_alta(7),
                                                                        resistencia(5),
                                                                        supervivencia(false),

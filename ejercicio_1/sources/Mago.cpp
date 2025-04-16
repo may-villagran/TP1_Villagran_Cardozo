@@ -9,11 +9,11 @@ Mago::Mago(string nombre_mago, TipoArma item_compatible) : nivel_mago(0),
                                                       compatible(item_compatible),
                                                       armas_poseidas(),
                                                       hay_item_compatible(false),
-                                                      nombre(nombre)
-{
-}
+                                                      nombre(nombre_mago) {}
 
-Mago::Mago(string nombre_mago, TipoArma item_compatible, vector<unique_ptr<IArma>> armas) : Mago(nombre, item_compatible)
+
+
+Mago::Mago(string nombre_mago, TipoArma item_compatible, vector<unique_ptr<IArma>> armas) : Mago(nombre_mago, item_compatible)
 {
     for (unique_ptr<IArma> &a : armas)
     {
@@ -72,13 +72,13 @@ void Mago::mostrar_info()
     }
 }
 // ________________Hechicero_________________________
-Hechicero::Hechicero(string nombre_mago) : Mago(nombre, TipoArma::LIBRO_HECHIZOS),
+Hechicero::Hechicero(string nombre_mago) : Mago(nombre_mago, TipoArma::LIBRO_HECHIZOS),
                                       nivel_inteligencia(15),
                                       poder_magico_alto(true),
                                       energia_magica(50) {}
 
 Hechicero::Hechicero(string nombre_mago, vector<unique_ptr<IArma>> armas)
-    : Mago(nombre, TipoArma::LIBRO_HECHIZOS, move(armas)),
+    : Mago(nombre_mago, TipoArma::LIBRO_HECHIZOS, move(armas)),
       nivel_inteligencia(15),
       poder_magico_alto(true),
       energia_magica(50) {}
@@ -145,14 +145,14 @@ void Hechicero::aprender_habilidades()
 }
 
 // ___________Conjurador_______________
-Conjurador::Conjurador(string nombre_mago) : Mago(nombre, TipoArma::BASTON),
+Conjurador::Conjurador(string nombre_mago) : Mago(nombre_mago, TipoArma::BASTON),
                                         cantidad_hechizos(3),
                                         invocacion_activa(false),
                                         energia_invocacion(40),
                                         resistencia_magica(10) {}
 
 Conjurador::Conjurador(string nombre_mago, vector<unique_ptr<IArma>> armas)
-    : Mago(nombre, TipoArma::BASTON, move(armas)),
+    : Mago(nombre_mago, TipoArma::BASTON, move(armas)),
       cantidad_hechizos(3),
       invocacion_activa(false),
       energia_invocacion(40),
@@ -230,13 +230,13 @@ void Conjurador::aprender_habilidades()
 }
 
 // __________Brujo______________
-Brujo::Brujo(string nombre_mago) : Mago(nombre, TipoArma::AMULETO),
+Brujo::Brujo(string nombre_mago) : Mago(nombre_mago, TipoArma::AMULETO),
                               poder_oscuro(true),
                               defensa_magica(20),
                               energia_oscura(50) {}
 
 Brujo::Brujo(string nombre_mago, vector<unique_ptr<IArma>> armas)
-    : Mago(nombre, TipoArma::AMULETO, move(armas)),
+    : Mago(nombre_mago, TipoArma::AMULETO, move(armas)),
       poder_oscuro(true),
       defensa_magica(20),
       energia_oscura(50) {}
@@ -304,7 +304,7 @@ void Brujo::aprender_habilidades()
 }
 
 // Nigromante
-Nigromante::Nigromante(string nombre_mago) : Mago(nombre, TipoArma::POCION),
+Nigromante::Nigromante(string nombre_mago) : Mago(nombre_mago, TipoArma::POCION),
                                         dominio_muertos(true),
                                         cantidad_muertos(5),
                                         control_absoluto(false),
@@ -312,7 +312,7 @@ Nigromante::Nigromante(string nombre_mago) : Mago(nombre, TipoArma::POCION),
                                         energia_necromantica(40) {}
 
 Nigromante::Nigromante(string nombre_mago, vector<unique_ptr<IArma>> armas)
-    : Mago(nombre, TipoArma::POCION, move(armas)),
+    : Mago(nombre_mago, TipoArma::POCION, move(armas)),
       dominio_muertos(true),
       cantidad_muertos(5),
       control_absoluto(false),
