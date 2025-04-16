@@ -17,6 +17,8 @@ Mago::Mago(string nombre_mago, TipoArma item_compatible, vector<unique_ptr<IArma
 {
     for (unique_ptr<IArma> &a : armas)
     {
+        if(!a) continue;
+        hay_item_compatible = a->get_tipo() == compatible ? true : false;
         this->armas_poseidas.push_back(move(a));
     }
 }
@@ -52,13 +54,14 @@ void Mago::set_armas(unique_ptr<IArma> arma)
 
 void Mago::mostrar_info()
 {
-    cout << "__Información básica del personaje:___"<<endl;
+    cout << "\n__Información básica del personaje:___"<<endl;
     cout << "Nombre: " << nombre << endl;
     cout << "HP: " << hp << endl;
     cout << "Daño mágico: " << daño_magico << endl;
     cout << "Nivel de mago: " << nivel_mago << endl;
     cout << "Tiene item compatible: " << (hay_item_compatible ? "Sí" : "No") << endl;
 
+    cout << "__Información básica del arma portada:___"<<endl;
     if(armas_poseidas.size()==0){
         cout<<"El mago no tiene armas."<<endl;
     }
@@ -70,6 +73,7 @@ void Mago::mostrar_info()
             cout<<endl;
         }
     }
+    cout << "__Información específica del personaje:___"<<endl;
 }
 // ________________Hechicero_________________________
 Hechicero::Hechicero(string nombre_mago) : Mago(nombre_mago, TipoArma::LIBRO_HECHIZOS),
@@ -88,7 +92,8 @@ int Hechicero::atacar()
     int daño_armas=0;
     for(unique_ptr<IArma>&a : armas_poseidas){
         daño_armas = a->atacar();
-        a->mejorar();
+        if(a->get_duarbilidad()>0) a->mejorar();
+
     }
     int daño_base = static_cast<int>(daño_magico + (poder_magico_alto ? daño_magico * 0.2 : 0)+daño_armas*0.2);
     cout<<"El daño total es de: "<<daño_base + nivel_inteligencia<<endl;
@@ -163,7 +168,7 @@ int Conjurador::atacar()
     int daño_armas=0;
     for(unique_ptr<IArma>&a : armas_poseidas){
         daño_armas = a->atacar();
-        a->mejorar();
+        if(a->get_duarbilidad()>0) a->mejorar();
     }
     int daño_base =static_cast<int>( daño_magico + (invocacion_activa ? daño_magico * 0.3 : 0) + daño_armas*0.1 +cantidad_hechizos * 0.5);
     
@@ -246,7 +251,7 @@ int Brujo::atacar()
     int daño_armas=0;
     for(unique_ptr<IArma>&a : armas_poseidas){
         daño_armas = a->atacar();
-        a->mejorar();
+        if(a->get_duarbilidad()>0) a->mejorar();
     }
     int daño_base = static_cast<int>(daño_magico + (poder_oscuro ? daño_magico * 0.25 : 0)+daño_armas*0.001+ energia_oscura * 0.5);
     cout<<"El daño total es: "<<daño_base;
@@ -324,7 +329,7 @@ int Nigromante::atacar()
     int daño_armas=0;
     for(unique_ptr<IArma>&a : armas_poseidas){
         daño_armas = a->atacar();
-        a->mejorar();
+        if(a->get_duarbilidad()>0) a->mejorar();
     }
     int daño_base = static_cast<int>(daño_magico + (dominio_muertos ? daño_magico * 0.3 : 0)+daño_armas*0.01+cantidad_muertos * 0.2);
     cout<<"El daño total es: "<<daño_base;

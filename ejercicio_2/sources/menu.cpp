@@ -28,7 +28,7 @@ void menu_creacion_mago()
 
 void menu_creacion_guerrero()
 {
-    cout << "\nSeleccione el tipo de mago:" << endl;
+    cout << "\nSeleccione el tipo de guerrero:" << endl;
     cout << "1. Barbaro" << endl;
     cout << "2. Paladin" << endl;
     cout << "3. Caballero" << endl;

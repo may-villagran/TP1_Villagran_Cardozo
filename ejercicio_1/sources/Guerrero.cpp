@@ -19,6 +19,7 @@ Guerrero::Guerrero(string nombre_guerrero, TipoArma arma_compatible, vector<uniq
     {
         if (!arma)
             continue; // no agrega la arma no valida
+        hay_arma_compatible = arma->get_tipo() == arma_compatible ? true : false;
         this->armas_poseidas.push_back(move(arma));
     }
 }
@@ -52,12 +53,14 @@ void Guerrero::set_armas(unique_ptr<IArma> arma)
 }
 void Guerrero::mostrar_info()
 {
+    cout << "___Información básica del personaje:___"<<endl;
     cout << "Nombre: " << nombre << endl;
     cout << "HP: " << hp << endl;
     cout << "Daño de ataque: " << daño_ataque << endl;
     cout << "Nivel de guerreo: " << nivel_guerrero << endl;
     cout << "Tiene item compatible: " << (hay_arma_compatible ? "Sí" : "No") << endl;
 
+    cout << "__Información básica del arma portada:___"<<endl;
     if(armas_poseidas.size()==0){
         cout<<"El guerrero no tiene armas."<<endl;
     }
@@ -69,6 +72,7 @@ void Guerrero::mostrar_info()
             cout<<endl;
         }
     }
+    cout << "__Información específica del personaje:___"<<endl;
 }
 
 // _________Barbaro____________
@@ -94,7 +98,7 @@ int Barbaro::atacar()
     int daño_armas=0;
     for(unique_ptr<IArma>&a : armas_poseidas){
         daño_armas = a->atacar();
-        a->mejorar();
+        if(a->get_duarbilidad()>0) a->mejorar();
     }
 
     int daño_base = static_cast<int>( daño_ataque + (hay_arma_compatible ? daño_ataque * 0.05 : 0) + daño_armas * 0.01);
@@ -177,7 +181,7 @@ int Paladin::atacar()
     int daño_armas=0;
     for(unique_ptr<IArma>&a : armas_poseidas){
         daño_armas = a->atacar();
-        a->mejorar();
+        if(a->get_duarbilidad()>0) a->mejorar();
     }
     int daño_base = static_cast<int>(daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1);
     int daño_total = static_cast<int>(daño_base + fuerza + (porcentaje_agilidad * 10));
@@ -257,7 +261,7 @@ int Caballero::atacar()
         int daño_armas=0;
     for(unique_ptr<IArma>&a : armas_poseidas){
         daño_armas = a->atacar();
-        a->mejorar();
+        if(a->get_duarbilidad()>0) a->mejorar();
     }
     int daño_base = static_cast<int>(daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1);
     int daño_total = static_cast<int>(daño_base + (precision * 10) + velocidad_ataque);
@@ -343,7 +347,7 @@ int Mercenario::atacar()
         int daño_armas=0;
     for(unique_ptr<IArma>&a : armas_poseidas){
         daño_armas = a->atacar();
-        a->mejorar();
+        if(a->get_duarbilidad()>0) a->mejorar();
     }
     int daño_base = static_cast<int>(daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1);
     int daño_total = static_cast<int>(daño_base + destreza_combate + (rapidez_golpe * 2));
@@ -434,7 +438,7 @@ int Gladiador::atacar()
         int daño_armas=0;
     for(unique_ptr<IArma>&a : armas_poseidas){
         daño_armas = a->atacar();
-        a->mejorar();
+        if(a->get_duarbilidad()>0) a->mejorar();
     }
     
     int daño_base = static_cast<int>(daño_ataque + (hay_arma_compatible ? daño_ataque * 0.1 : 0)+ daño_armas*0.1);
